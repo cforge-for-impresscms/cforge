@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<{$xoops_langcode}>" lang="<{$xoops_langcode}>">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=<{$xoops_charset}>" />
+<meta http-equiv="content-language" content="<{$xoops_langcode}>" />
+<meta name="robots" content="<{$xoops_meta_robots}>" />
+<meta name="keywords" content="<{$xoops_meta_keywords}>" />
+<meta name="description" content="<{$xoops_meta_description}>" />
+<meta name="rating" content="<{$xoops_meta_rating}>" />
+<meta name="author" content="<{$xoops_meta_author}>" />
+<meta name="copyright" content="<{$xoops_meta_copyright}>" />
+<meta name="generator" content="XOOPS" />
+<title><{$xoops_sitename}> - <{$xoops_pagetitle}></title>
+<link href="<{$xoops_url}>/favicon.ico" rel="SHORTCUT ICON" />
+<link rel="stylesheet" type="text/css" media="all" href="<{$xoops_url}>/xoops.css" />
+<link rel="stylesheet" type="text/css" media="all" href="<{$xoops_themecss}>" />
+<!-- RMV: added module header -->
+<{$xoops_module_header}>
+<script type="text/javascript">
+<!--
+<{$xoops_js}>
+//-->
+</script>
+
+
+</head>
+<body>
+<table align="center" cellpadding="0" cellspacing="0" class="head_table">
+  <tr> 
+    <td class="head_logo"><a href="<{$xoops_url}>/"><img src="<{$xoops_imageurl}>images/logo.gif" border="0" alt="IMAGO:THEMES"></a></td>
+    <td class="head_banner"><{$xoops_banner}></td>
+  </tr>
+  <tr> 
+    <td colspan="2" class="head_menu">You can marker menu in here or remove it 
+      from theme.html</td>
+  </tr>
+</table>
+<table align="center" class="body_table">
+  <tr>
+    <td><table border="0" cellpadding="0" cellspacing="0">
+        <tr> <{if $xoops_lblocks}>
+          <td rowspan="2" valign="top" id="leftcolumn"> 
+            <!-- Start left blocks loop -->
+            <{foreach item=block from=$xoops_lblocks}> <{include file="cforge_default/theme_blockleft.html"}> 
+            <{/foreach}> 
+            <!-- End left blocks loop -->
+          </td><{/if}>
+          <td colspan="2" valign="top" class="body_bar"><img src="<{$xoops_imageurl}>images/nav.gif" align="absmiddle" /><a href="<{$xoops_url}>/"> 
+            <{$xoops_sitename}></a> - <{$xoops_pagetitle}></td>
+          <{if $xoops_showrblock == 1}> <{/if}> </tr>
+        <tr> 
+          <td valign="top" id="centercolumn"> 
+            <!-- Display center blocks if any -->
+            <{if $xoops_showcblock == 1}> <table cellspacing="0">
+              <tr valign="top"> 
+                <td colspan="2" id="centerCcolumn"> 
+                  <!-- Start center-center blocks loop -->
+                  <{foreach item=block from=$xoops_ccblocks}> <{include file="cforge_default/theme_blockcenter_c.html"}> 
+                  <{/foreach}> 
+                  <!-- End center-center blocks loop -->
+                </td>
+              </tr>
+              <tr> 
+                <td valign="top" id="centerLcolumn"> 
+                  <!-- Start center-left blocks loop -->
+                  <{foreach item=block from=$xoops_clblocks}> <{include file="cforge_default/theme_blockcenter_l.html"}> 
+                  <{/foreach}> 
+                  <!-- End center-left blocks loop -->
+                </td>
+                <td valign="top" id="centerRcolumn"> 
+                  <!-- Start center-right blocks loop -->
+                  <{foreach item=block from=$xoops_crblocks}> <{include file="cforge_default/theme_blockcenter_r.html"}> 
+                  <{/foreach}> 
+                  <!-- End center-right blocks loop -->
+                </td>
+              </tr>
+            </table>
+            <{/if}> 
+            <!-- End display center blocks -->
+            <div id="content"> <{$xoops_contents}> </div></td>
+          <{if $xoops_showrblock == 1}><td valign="top" id="rightcolumn"> 
+            <!-- Start right blocks loop -->
+            <{foreach item=block from=$xoops_rblocks}> <{include file="cforge_default/theme_blockright.html"}> 
+            <{/foreach}> 
+            <!-- End right blocks loop -->
+          </td><{/if}>
+        </tr>
+      </table></td>
+  </tr></table>
+
+<br />
+<br />
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+    <td id="footerbar">Powered by <a href="http://www.xoopscube.org">XOOPS Cube </a>&copy; 2.1
+    </td>
+  </tr>
+</table>
+</body>
+</html>

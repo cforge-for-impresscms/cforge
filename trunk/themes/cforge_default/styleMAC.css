@@ -1,0 +1,336 @@
+
+/*----------------------  CSS FOR XOOPS 2.0.3 -------------------------*/
+
+/*-- 页面属性 --*/
+body {	color: #000000;	background: #FFFFFF;margin: 0;	padding: 0;	font-size: 12px;}
+hr {color:#9FBCE3; height:1px;}
+/*-- 超链接 --*/
+a {color:  #3A4F6C; text-decoration: none; font-weight: bold; background-color: transparent;}
+a:hover {color: #3366CC;}
+
+/*-- 标题大小 --*/
+h1 {}
+h2 {}
+h3 {}
+h4 {}
+h5 {}
+
+/*-- 项目列表 --*/
+ul {
+	margin: 2px;
+	padding: 2px;
+	list-style: square inside;
+	text-align: left;
+	color: #333333;
+	line-height: 18px;
+}
+li {
+	list-style: square url(images/list.gif) inside;
+	color: #999999;
+}
+li a{
+	list-style: square url(images/list.gif) inside;
+	font-size: 12px;
+}
+
+/*-- 按钮 --*/
+textarea, select, input  {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	padding: 2px 2px 1px 2px; color: #465584;
+
+	font-size: 12px;
+}
+
+
+/*-- 表格 --*/
+table {
+	width: 100%;
+	padding: 0px;
+}
+TR, TD {
+	font-family: Verdana, Tahoma, Arial;
+	font-size: 12px;
+	color: #000000;
+	padding: 0px; vertical-align: top;
+}
+
+/*------------------- 区块 ----------------------*/
+/*-- 页首 --*/
+.head_table{
+	background-color: #5780C0;
+	width: 100%;
+	text-align: center;
+	border: 1px solid #4C77B6;
+	background-image: url(images/header_tile.gif);
+	background-repeat: repeat-x;
+}
+.body_table{
+	background-color: #FFFFFF;
+	width: 100%;
+}
+.head_logo{
+	text-align: left;
+}
+.head_menu {
+	background-color: #EEF2F7; height: 30px; vertical-align: middle;
+}
+.body_bar{
+	padding: 5px 10px; vertical-align: middle;
+}
+.head_banner {
+	text-align: center;
+}
+/*-- 左区块 --*/
+td#leftcolumn {width: 170px; font-size:12px; background-color: #FFFFFF;
+}
+td#leftcolumn th {	background-color:#9FBCE3;
+	vertical-align: middle;
+	padding: 5px;
+	color: #3A4F6C;
+	background-image: url(images/sub_title.gif);
+	background-repeat: repeat-x;}
+td#leftcolumn div.blockTitle {
+	width: 164px;
+	padding:6px 2px 2px;
+	color:  #FFFFFF;
+	font-weight: bold;
+	font-size: 12px;
+	background-image: url(images/title.gif);
+	background-repeat: repeat-x;
+	border-top: 1px solid #4C77B6;
+	border-right: 1px solid #4C77B6;
+	border-left: 1px solid #4C77B6;
+	background-color: #6899DB;
+}
+td#leftcolumn div.blockContent {
+	padding: 4px;
+	line-height: 120%;
+	border: 1px solid #4C77B6;
+	background: #FAFCFE;
+}
+
+/*-- 中中区块 --*/
+td#centercolumn {
+	font-size: 12px;
+	line-height: 20px;
+	padding: 0px 10px 10px; 
+}
+
+td#centercolumn th {
+	background-color:#9FBCE3;
+	vertical-align: middle;
+	padding: 5px;
+	color: #3A4F6C;
+	background-image: url(images/sub_title.gif);
+	background-repeat: repeat-x;
+}
+td#centerCcolumn {padding: 0px 3px 1px 3px;}
+td#centerCcolumn div.blockTitle {
+	color:  #FFFFFF;
+	font-weight: bold;
+	font-size: 12px;
+	background-image: url(images/title.gif);
+	background-repeat: repeat-x;
+	border-top: 1px solid #4C77B6;
+	border-right: 1px solid #4C77B6;
+	border-left: 1px solid #4C77B6;
+	background-color: #6899DB;
+	padding: 6px 2px 2px;
+	height: 18px;
+}
+td#centerCcolumn div.blockContent {
+	padding: 4px;
+	line-height: 120%;
+	border: 1px solid #4C77B6;
+	background: #FAFCFE;
+}
+/*-- 中左区块 --*/
+td#centerLcolumn {width: 50%; padding: 0px 3px 0px 5px;}
+td#centerLcolumn div.blockTitle {	
+	padding:6px 2px 2px;
+	color:  #FFFFFF;
+	font-weight: bold;
+	font-size: 12px;
+	background-image: url(images/title.gif);
+	background-repeat: repeat-x;
+	border-top: 1px solid #4C77B6;
+	border-right: 1px solid #4C77B6;
+	border-left: 1px solid #4C77B6;
+	background-color: #6899DB;
+}
+td#centerLcolumn div.blockContent {		padding: 4px;
+	line-height: 120%;
+	border: 1px solid #4C77B6;
+	background: #FAFCFE;}
+
+/*-- 中右区块 --*/
+td#centerRcolumn {width: 50%; padding: 0px 3px 0px 3px;}
+td#centerRcolumn div.blockTitle {		padding:6px 2px 2px;
+	color:  #FFFFFF;
+	font-weight: bold;
+	font-size: 12px;
+	background-image: url(images/title.gif);
+	background-repeat: repeat-x;
+	border-top: 1px solid #4C77B6;
+	border-right: 1px solid #4C77B6;
+	border-left: 1px solid #4C77B6;
+	background-color: #6899DB;;}
+td#centerRcolumn div.blockContent {		padding: 4px;
+	line-height: 120%;
+	border: 1px solid #4C77B6;
+	background: #FAFCFE;}
+
+/*-- 模组内容显示 --*/
+div#content {text-align: left;  padding: 8px 3px 8px 3px;  }
+
+/*-- 右区块 --*/
+td#rightcolumn {width:170px; font-size:12px;}
+td#rightcolumn th {	background-color:#9FBCE3;
+	vertical-align: middle;
+	padding: 5px;
+	color: #3A4F6C;
+	background-image: url(images/sub_title.gif);
+	background-repeat: repeat-x;}
+td#rightcolumn div.blockTitle {
+	width: 164px;
+	padding:6px 2px 2px;
+	color:  #FFFFFF;
+	font-weight: bold;
+	font-size: 12px;
+	background-image: url(images/title.gif);
+	background-repeat: repeat-x;
+	border-top: 1px solid #4C77B6;
+	border-right: 1px solid #4C77B6;
+	border-left: 1px solid #4C77B6;
+	background-color: #6899DB;
+}
+td#rightcolumn div.blockContent {
+	padding: 4px;
+	line-height: 18px;
+	border: 1px solid #4C77B6;
+	background: #FAFCFE;
+}
+/*-- 页脚 --*/
+td#footerbar { color: #000000; height: 30px; vertical-align: middle; text-align: center;  font-weight: normal;  font-size: 11px;   }
+
+/*-- 导航菜单 --*/
+td#mainmenu a { padding: 2px 2px 2px  ; 	color:#3A4F6C;}
+td#mainmenu a:hover { color : #3366CC;}
+td#mainmenu a.menuTop { padding: 2px 2px 0px 10px; }
+td#mainmenu a.menuMain {padding: 2px 2px 0px 10px;}
+td#mainmenu a.menuSub {
+	padding-left: 24px;
+	background: url(images/arrows2.gif) no-repeat;
+	font-weight: normal;
+}
+
+/*-- 用户菜单 --*/
+td#usermenu a {margin: 0; padding: 2px 2px 0px 10px; 	color: #3A4F6C;
+background: no-repeat;	font-weight: normal;
+}
+td#usermenu a:hover {color : #3366cc;}
+td#usermenu a.menuTop {}
+td#usermenu a.highlight {}
+
+/*-- 表格交换颜色显示 --*/
+.outer { background-color: #ffffff;  border: 1px solid #5780C0;  }
+.head {
+	background-color: #D1DCEB;
+	padding:5px;
+	color: #3A4F6C;
+}
+.even {background-color:#DFE6EF; padding: 5px;}
+.odd {background-color: #EEF2F7; padding: 5px;}
+.foot {background-color:  #D1DCEB; padding-top: 5px;  padding-right: 5px;  padding-left: 5px;  padding-bottom: 5px;   color: #3A4F6C ; text-align: center; }
+tr.even td {background-color: #DFE6EF; padding: 5px;}
+tr.odd td {background-color: #EEF2F7; padding: 5px;}
+
+/*-- 警告信息 --*/
+div.errorMsg { background-color: #5780C0; text-align: center; border-top: 1px solid #465584; border-left: 1px solid #465584; border-right: 1px solid #465584; border-bottom: 1px solid #465584; font-weight: bold; padding: 10px;  color: White; }
+div.confirmMsg { background-color: #F1F2F5; color: #465584; text-align: center; border-top: 1px solid #5780C0; border-left: 1px solid #5780C0; border-right: 1px solid #5780C0; border-bottom: 1px solid #5780C0; font-weight: bold; padding: 10px;}
+div.resultMsg { background-color : #5780C0; color: #D1DBEC; text-align: center; border-top: 1px solid #465584; border-left: 1px solid #465584; font-weight: bold; border-right: 1px solid #465584; border-bottom: 1px solid #465584; padding: 10px;}
+
+/*-- 代码与引用 --*/
+div.xoopsCode {
+	background: #FFFFFF;
+	border: 1px solid #5780C0;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	padding: 6px 6px 6px 6px;
+	color: #465584;
+	margin: 20px;
+}
+div.xoopsQuote {
+	background: #FFFFFF;
+	border: 1px solid #5780C0;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	padding: 6px 6px 6px 6px;
+	color: #465584;
+}
+
+/*-- 模组 --*/
+.item {
+ background-color:  #F5F9FD;
+	border: 1px solid #5780C0;
+	padding: 1px;
+}
+.itemHead {
+	background-image: url(images/item_title.gif); 
+	background-color: #D1DCEB; color: Black; 
+	font-weight: bold;
+	font-size: 12px; 
+	padding: 3px 5px 5px 25px;
+	background-repeat: no-repeat;
+	border-bottom: 1px solid White;
+	border-left: 1px solid White;
+	border-right: 1px solid White;
+}
+.itemInfo {
+	color: #666666; text-align: right;
+	padding: 5px 5px 5px 5px;
+	background-color: #EEF2F7;
+	border-bottom: 1px solid White;
+	border-left: 1px solid White;
+	border-right: 1px solid White;
+}
+.itemTitle a {
+	color: #465584;
+	font-weight: bold; font-size: 12px;
+}
+
+.itemTitle a:hover{
+	color: #3366CC;
+}
+.itemPoster {}
+.itemPostDate {}
+.itemStats {}
+.itemBody {padding-left: 5px;  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;	border-left: 1px solid White;
+	border-right: 1px solid White; }
+.itemText {  line-height: 1.6em;  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; }
+.itemText:first-letter {}
+.itemFoot {
+	border-top: 1px solid White;	border-left: 1px solid White;
+	border-right: 1px solid White;
+	text-align: right;
+	padding: 5px 5px 5px 5px;
+	color: #999999;
+	 background-color: #EEF2F7;
+}
+.itemFoot a{color: #465584}
+.itemAdminLink {}
+.itemPermaLink {}
+
+/*-- 评论 --*/
+.comTitle {font-weight: bold; margin-bottom: 3px; color: #465584; }
+.comText {padding: 3px;}
+.comUserStat {font-size: 12px; color: #465584; font-weight:bold; border: 1px solid #5780C0;  background-color: #FFFFFF; margin: 3px; padding: 3px;}
+.comUserStatCaption {font-weight: normal;}
+.comUserStatus {margin-left: 3px; margin-top: 10px; color: #465584; font-weight:bold; font-size: 12px;}
+.comUserRank {margin: 2px;}
+.comUserRankText {font-size: 12px;font-weight:bold;}
+.comUserRankImg {border: 0;}
+.comUserName {}
+.comUserImg {margin: 2px;}
+.comDate {font-weight: normal; font-style: italic; font-size: 12px;}
+.comDateCaption {font-weight: bold; font-style: normal;}
+
+/*---------------------- CSS FOR XOOPS 2.0.3 -------------------------*/

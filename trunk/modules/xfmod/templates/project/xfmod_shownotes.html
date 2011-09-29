@@ -1,0 +1,12 @@
+<{$project_title}>
+<{$project_tabs}>
+<{$notes_info}>
+<{if $notes_content != ""}>
+	<{include file="db:xfmod_groupblock.html" title="$notes_title" content="$notes_content"}>
+<{/if}>
+<{if $change_content != ""}>
+  	<{include file="db:xfmod_groupblock.html" title="$change_title" content="$change_content"}>
+<{/if}>
+<{if $depend_content != ""}>
+  	<{include file="db:xfmod_groupblock.html" title="$depend_title" content="$depend_content"}>
+<{/if}>

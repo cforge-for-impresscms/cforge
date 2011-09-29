@@ -1,0 +1,53 @@
+<?php
+$text_header["from"]="<b>De:</b> ";
+$text_header["subject"]="<b>Assunto:</b> ";
+$text_header["newsgroups"]="<b>Newsgroups:</b> ";
+$text_header["followup"]="<b>Seguimento:</b> ";
+$text_header["organization"]="<b>Organiza??o:</b> ";
+$text_header["date"]="<b>Data:</b> ";
+$text_header["message-id"]="<b>Menssagem-ID:</b> ";
+$text_header["references"]="<b>Refer?ncias:</b> ";
+$text_header["user-agent"]="<b>Utilizador-Agente:</b> ";
+$text_header["date_format"]="d M Y H:i:s";
+
+$text_thread["no_articles"]="<p><b>N?o existem artigos disponiveis</b></p>";
+$text_thread["button_write"]="Escrever";
+$text_thread["button_grouplist"]="Newsgroups";
+$text_thread["button_top"]="Voltar acima";
+$text_thread["date"]="<b>Data</b>";
+$text_thread["subject"]="<b>Assunto</b>";
+$text_thread["author"]="<b>Autor</b>";
+$text_thread["no_such_group"]="Grupo n?o existente.";
+
+$text_groups["newsgroup"]="<b>Newsgroup</b>";
+$text_groups["description"]="<b>Descri??o</b>";
+
+$text_article["button_answer"]="Resposta";
+
+$text_post["missing_message"]="Deve incluir uma menssagem para enviar";
+$text_post["missing_email"]="Deve incluir o seu endere?o de Correio Electronico";
+$text_post["missing_name"]="Deve incluir o seu nome ou pseudonimo";
+$text_post["missing_subject"]="Deve incluir um assunto";
+$text_post["button_post"]="Enviar";
+$text_post["remember"]="Lembrar nome e Correio-E";
+$text_post["message"]="Menssagem";
+$text_post["group_head"]="Compor artigo para ";
+$text_post["group_tail"]="";
+$text_post["followup_not_allowed"]="N?o ? permitido enviar artigos:";
+$text_post["message_posted"]="Menssagem enviada";
+$text_post["message_posted2"]="A menssagem foi enviada com sucesso";
+$text_post["button_back"]="Voltar";
+$text_post["button_back2"]="para";
+$text_post["error_newsserver"]="O servidor de news n?o aceita a menssagem:";
+$text_post["error_readonly"]="O grupo est? protegido contra escrita";
+$text_post["error_wrong_email"]="O endere?o do Correio-E est? errado";
+
+$text_error["error:"]='<font color="red">Erro:</font>';
+$text_error["connection_failed"]="A conex?o com o servidor de news falhow";
+$text_error["article_not_found"]="<p>O artigo n?o existe.</p>";
+$text_error["read_access_denied"]="<p>N?o tem permiss?o para ler!</p>";
+$text_error["post_failed"]="Conex?o falhada. Tente novamente mais tarde.";
+$text_error["auth_error"]="Autentica??o no servidor de news falhou";
+$text_error["spool_error"]="Erro no spoolfile. Por favor refresque o navegador.";
+
+?>

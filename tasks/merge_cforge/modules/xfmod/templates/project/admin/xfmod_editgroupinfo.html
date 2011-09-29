@@ -1,0 +1,44 @@
+<{$project_title}>
+<{$project_tabs}>
+<{if $feedback }><div class='errorMsg'><{$feedback}></div><{/if}>
+<{$project_admin_header}>
+
+<p>
+<form action="<{$php_self}>" method="POST">
+<input type="hidden" name="group_id" value="<{$group_id}>">
+
+<p><{$group_name_label}>:
+<BR><input type="text" name="form_group_name" size="40" value="<{$group_name}>">
+
+<p><{$group_desc_label}>:
+<BR><TEXTAREA cols=80 rows=8 wrap="virtual" name="form_shortdesc">
+<{$group_desc}></textarea>
+
+<{if $isProject == true}>
+<p><{$group_homepage_label}>: <BR><input type="text" name="form_homepage" size="60" value="<{$group_homepage}>">
+<br>
+<{/if}>
+<HR>
+
+<H4><{$activefeatures_label}>:</H4>
+<p>
+<table>
+	<{section name=i loop=$use}>
+	<tr>
+		<td>
+			<input type="CHECKBOX" name="<{$use[i][0]}>" value="1" <{$use[i][2]}> >
+		</td>
+		<td>
+			<strong><{$use[i][1]}></strong>
+		</td>
+	</tr>
+	<{/section}>
+</table>
+<p><{$email_label}><p>
+<strong><{$tasks_label}>:</strong><BR>
+<input type="text" name="new_task_address" value="<{$email}>" size="25" maxlength="250">
+(<{$sendonallupdates_label}>)
+<input type="CHECKBOX" name="send_all_tasks" value="1" <{$sendonallupdates}> ><BR>
+<HR>
+<p><input type="submit" name="submit" value="<{$update_button_label}>">
+</form>

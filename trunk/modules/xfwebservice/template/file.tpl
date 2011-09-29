@@ -1,0 +1,1 @@
+<?php echo '<file id="'.$id.'" name="'.$name.'"'.($contents ? '>'.$contents.'</file>' : '/>'); ?>

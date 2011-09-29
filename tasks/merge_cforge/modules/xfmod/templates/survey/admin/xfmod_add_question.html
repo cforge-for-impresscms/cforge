@@ -1,0 +1,30 @@
+<{$survey_header}>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+var timerID2 = null;
+
+function show_questions() {
+   newWindow = open("","occursDialog","height=600,width=700,scrollbars=yes,resizable=yes");
+   newWindow.location=('show_questions.php?popup=1&group_id=<{$group_id}>');
+}
+
+// -->
+</script>
+
+<p>
+<form action="add_question.php" method="POST">
+<input type="hidden" name="post_changes" value="Y">
+<input type="hidden" name="group_id" value="<{$group_id}>">
+<{$question}>:<BR>
+<input type="text" name="question" value="" size="60" maxlength="150">
+<p>
+
+<{$question_type}><br/>
+
+<{$question_type_select}>
+
+<br/><br/><a class='bg4' href='javascript:show_questions()'>
+Display Available Questions</a>
+
+<p><input type="submit" name="submit" value="<{$add_question}>"></form>

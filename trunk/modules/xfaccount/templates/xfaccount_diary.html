@@ -1,0 +1,69 @@
+<{$account_header}>
+
+	<table class="item">
+
+	<tr><td class="itemTitle"><h4><{$info_str}></h4></td></tr>
+
+	<FORM ACTION="<{$smarty.server.PHP_SELF}>" METHOD="POST">
+	<INPUT TYPE="HIDDEN" NAME="<{$proc_str}>" VALUE="1">
+	<INPUT TYPE="HIDDEN" NAME="diary_id" VALUE="<{$diary_id}>">
+	<TR><TD COLSPAN="2" class="itemTitle"><B><{$smarty.const._XF_MY_SUMMARY}></B><BR/>
+		<INPUT TYPE="TEXT" NAME="summary" SIZE="45" MAXLENGTH="60" VALUE="<{$summary}>" class="itemBody">
+	</TD></TR>
+
+	<TR><TD COLSPAN="2" class="itemTitle"><B><{$smarty.const._XF_MY_DETAILS}></B><BR/>
+		<TEXTAREA NAME="details" ROWS="15" COLS="60" WRAP="HARD" class="itemBody"><{$details}></TEXTAREA>
+	</TD></TR>
+	<TR><TD COLSPAN="2">
+		<P/>
+		<INPUT TYPE="SUBMIT" NAME="submit" VALUE="<{$smarty.const._XF_MY_SUBMITONCE}>">
+		&nbsp; <INPUT TYPE="CHECKBOX" NAME="is_public" VALUE="1" <{$is_public}> > <{$smarty.const._XF_G_ISPUBLIC}>
+		<P/><{$smarty.const._XF_MY_IFPUBLIC}><P/>
+		</FORM>
+	</TD></TR>
+
+	</TABLE>
+	
+	<{if $feedback}>
+	<div class="resultMsg"><{$feedback}></div>
+	<{/if}>
+	<P/>
+
+<table border="0" width="100%" cellspacing="0" cellpadding="0" class="outer">
+<tr>
+	<td width="14"><img src="<{$xoops_imageurl}>images/h_arrow.gif" width="14" height="26" border="0" alt=""></td>
+	<td width="100%" class="head3" valign="bottom" class="centerCcolumn">
+  	<div class="head"><{$smarty.const._XF_MY_EXISTINGDIARY}></div>
+	</td>
+</tr>
+<tr>
+	<td colspan="2" style="background-image:url(<{$xoops_imageurl}>images/dotlinebg_horiz.gif)"><img src="<{$xoops_imageurl}>images/spacer.gif" width="1" height="1" alt=""></td>
+</tr>
+<tr>
+	<td width="14"><img src="<{$xoops_imageurl}>images/spacer.gif" width="14" height="7" alt=""></td>
+	<td width="100%"><img src="<{$xoops_imageurl}>images/spacer.gif" width="1" height="7" alt=""></td>
+</tr>
+<tr>
+	<td colspan="2" class="centerCcolumn">
+		<div class="blockContent">
+			<table border=0 width=100%>
+				<{if $no_diary == true}>
+				  <tr><td colspan="2"><B><{$smarty.const._XF_MY_YOUHAVENODIARY}></B></td></tr>
+				<{else}>
+					<tr>
+					  <td><b><{$smarty.const._XF_MY_SUMMARY}></b></td>
+					  <td><b><{$smarty.const._XF_MY_CREATIONDATE}></b></td>
+					</tr>
+					<{section name=i loop=$diary_list}>
+						<TR>
+						  <TD><A HREF="<{$smarty.server.PHP_SELF}>?diary_id=<{$diary_list[i].id}>"><{$diary_list[i].summary}></A></TD>
+						  <TD><{$diary_list[i].date_posted}></TD>
+						</TR>
+					<{/section}>
+				<{/if}>
+			</table>
+		</div>
+	</td>
+</tr>
+</table>
+

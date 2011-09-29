@@ -1,0 +1,12 @@
+<table border="0" width='100%'>
+<{if $block.no_projects == true}>
+	<th><td><?php echo _XF_MY_NOPROJECTS ?></td></th>
+<{else}>
+	<{section name=i loop=$block.prj_list}>
+	<th>
+	  <td id="usermenu"><A href="<{$icms_url}>/modules/xfmod/<{if $block.prj_list[i].type == 1}>project<{else}>community<{/if}>/?<{$block.prj_list[i].unix_group_name}>"><{$block.prj_list[i].group_name}></a></td>
+	</th>
+	<{/section}>
+	<th><td id="usermenu"><A href="<{$icms_url}>/modules/xfaccount/">view my account</a></td></th>
+<{/if}>
+</table>

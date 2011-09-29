@@ -1,0 +1,24 @@
+<b>
+<{if $isForumAdmin == true}>
+<a href='admin/index.php?group_id=<{$group_id}>'><b><{$admin_label}></b></a>
+<{/if}>
+<{if $noforums == true}>
+	<p/><b><{$noforums_message}></b>
+	<{$dberror}>
+<{else}>
+	<p><{$choose_forum}></p>
+	<{section name=i loop=$forums}>
+		<A HREF='forum.php?forum_id=<{$forums[i].group_forum_id}>'>
+			<img src='<{$xoops_url}>/modules/xfmod/images/ic/cfolder15.png' width='15' height='13' border='0' alt=''>
+			&nbsp;<{$forums[i].forum_name}></A>
+			(<{$forums[i].total}> msgs)
+			<BR><{$forums[i].description}><P>
+	<{/section}>
+	<{section name=i loop=$extforums}>
+		<img src='<{$xoops_url}>/modules/xfmod/images/ic/cfolder15.png' width="15"height="13" border="0" alt=''>
+		&nbsp;<{$extforums[i].forum_name}>
+		<A HREF="http://developer-forums.novell.com/group/<{$extforums[i].forum_name}>/readerNoFrame.tpt/@thread@first@f@10@D-D,D@none/@article@first">[HTTP]</A>
+		<A HREF="news://developer-forums.novell.com/<{$extforums[i].forum_name}>">[NNTP]</A>	  
+		<P>
+	<{/section}>
+<{/if}>

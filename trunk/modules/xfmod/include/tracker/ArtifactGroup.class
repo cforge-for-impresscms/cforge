@@ -1,0 +1,180 @@
+<?php
+/**
+ * ArtifactGroup.class - Class to artifact groups
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id: ArtifactGroup.class,v 1.1.1.1 2003/08/01 19:13:48 devsupaul Exp $
+ *
+ */
+require_once(XOOPS_ROOT_PATH."/modules/xfmod/include/Error.class");
+
+class ArtifactGroup extends Error {
+  var $db;
+	/**
+	 * Artifact type object
+	 *
+	 * @var		object	$ArtifactType
+	 */	
+	var $ArtifactType; 
+
+	/**
+	 * Array of artifact data
+	 *
+	 * @var		array	$data_array
+	 */
+	var $data_array;
+
+	/**
+	 *  ArtifactGroup() - constructor
+	 *
+	 *  Use this constructor if you are modifying an existing artifact
+	 *
+	 *	@param	object	Artifact type object
+	 *  @param	array	(all fields from artifact_group) OR id from database
+	 *  @return true/false
+	 */
+	function ArtifactGroup(&$ArtifactType, $data=false) {
+	  global $xoopsDB;
+		
+		$this->db = $xoopsDB;
+		$this->Error(); 
+
+		//was ArtifactType legit?
+		if (!$ArtifactType || !is_object($ArtifactType)) {
+			$this->setError('ArtifactGroup: No Valid ArtifactType');
+			return false;
+		}
+		//did ArtifactType have an error?
+		if ($ArtifactType->isError()) {
+			$this->setError('ArtifactGroup: '.$Artifact->getErrorMessage());
+			return false;
+		}
+		$this->ArtifactType =& $ArtifactType;
+
+		if ($data) {
+			if (is_array($data)) {
+				$this->data_array =& $data;
+				return true;
+			} else {
+				if (!$this->fetchData($data)) {
+					return false;
+				} else {
+					return true;
+				}
+			}
+		}
+	}
+
+	/**
+	 *	create() - create a new item in the database
+	 *
+	 *	@param	string	Item name
+	 *  @return id on success / false on failure
+	 */
+	function create($name) {
+	  global $ts;
+		//
+		//	data validation
+		//
+		if (!$name) {
+			$this->setError('ArtifactGroup: '._XF_TRK_AG_NAMEREQUIRED);
+			return false;
+		}
+		if (!$this->ArtifactType->userIsAdmin()) {
+			$this->setError(_XF_G_PERMISSIONDENIED);
+			return false;
+		}
+		
+		$sql = "INSERT INTO ".$this->db->prefix("xf_artifact_group")." (group_artifact_id,group_name) "
+		      ."VALUES ('".$this->ArtifactType->getID()."','".$ts->makeTboxData4Save($name)."')";
+					
+		$result = $this->db->queryF($sql);
+
+		if ($result && unofficial_getAffectedRows($result) > 0) {
+			return true;
+		} else {
+			$this->setError($this->db->error());
+			return false;
+		}
+	}
+
+	/**
+	 *	fetchData() - re-fetch the data for this ArtifactGroup from the database
+	 *
+	 *	@param	int		Data ID
+	 *	@return true/false
+	 */
+	function fetchData($id) {
+		$res = $this->db->query("SELECT * FROM ".$this->db->prefix("xf_artifact_group")." WHERE id='$id'");
+		if (!$res || $this->db->getRowsNum($res) < 1) {
+			$this->setError('ArtifactGroup: Invalid ArtifactGroup ID');
+			return false;
+		}
+		$this->data_array =& $this->db->fetchArray($res);
+
+		return true;
+	}
+
+	/**
+	 *	getArtifactType() - get the ArtifactType Object this ArtifactGroup is associated with
+	 *
+	 *	@return ArtifactType
+	 */
+	function &getArtifactType() {
+		return $this->ArtifactType;
+	}
+	
+	/**
+	 *	getID() - get this ArtifactGroup's ID
+	 *
+	 *	@return the id #
+	 */
+	function getID() {
+		return $this->data_array['id'];
+	}
+
+	/**
+	 *	getName() - get the name
+	 *
+	 *	@return text name
+	 */
+	function getName() {
+		return $this->data_array['group_name'];
+	}
+
+	/**
+	 *  update() - update an ArtifactGroup
+	 *
+	 *  @param	string	Name of the group
+	 *  @return true/false
+	 */
+	function update($name) {
+	  global $ts;
+		
+		if (!$this->ArtifactType->userIsAdmin()) {
+			$this->setError(_XF_G_PERMISSIONDENIED);
+			return false;
+		}   
+		if (!$name) {
+			$this->setError(_XF_TRK_A_MISSINGPARAMETERS);
+			return false;
+		}
+		   
+		$sql = "UPDATE ".$this->db->prefix("xf_artifact_group")." SET group_name='".$ts->makeTboxData4Save($name)."' "
+		      ."WHERE id='". $this->getID() ."' "
+					."AND group_artifact_id='". $this->ArtifactType->getID() ."'";
+
+		$result = $this->db->queryF($sql);
+
+		if ($result && unofficial_getAffectedRows($result) > 0) {
+			return true;
+		} else {
+			$this->setError($this->db->error());
+			return false;
+		}
+	}
+}
+?>

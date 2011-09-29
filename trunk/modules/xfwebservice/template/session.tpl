@@ -1,0 +1,1 @@
+<session id="<?php echo $id; ?>"/>

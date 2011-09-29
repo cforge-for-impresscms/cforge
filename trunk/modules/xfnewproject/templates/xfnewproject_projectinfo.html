@@ -1,0 +1,84 @@
+<h2 style='text-align:left;'><{$title}></h2>
+
+<{if $feedback }><div class='errorMsg'><{$feedback}></div><{/if}>
+
+<{if $url==''}>
+
+	<form action='projectinfo.php' method='POST'>
+
+	<a name='<{$profullname}>'></a>
+	<h4>1. <{$profullname}></h4>
+
+	<{$reg_step1}>
+
+	<{$profullname}>
+	<br/>
+	<input size='40' maxlength='60' type='text' name='full_name' value='<{$full_name}>'>
+
+	<a name='<{$propurpose}>'></a>
+	<h4>2. <{$propurpose}></h4>
+
+	<{$reg_step2}>
+
+	<font size="-1">
+	<textarea name='purpose' wrap='virtual' cols='70' rows='10'><{$purpose}></textarea>
+	</font>
+
+	<h4>3. <{$license}></h4>
+
+	<{$reg_step3}>
+
+	<a name='<{$licenseforthisproject}>'></a>
+	<p/><b><{$licenseforthisproject}></b>
+
+	<p/><b><{$yourlicense}>:</b><br/>
+
+	<{$selectlicense}>
+
+	<{$reg_step3a}>
+	<br/>
+	<textarea name='license_other' wrap='virtual' cols='60' rows='5'><{$license_other}></textarea>
+	<p/>
+
+	<a name='<{$publicdescription}>'></a>
+	<h4>4. <{$publicdescription}></h4>
+
+	<{$reg_step4}>
+	<font size='-1'>
+	<textarea name='description' wrap='virtual' cols='70' rows='5'><{$description}></textarea>
+	</font>
+
+	<a name='<{$prounixname}>'></a>
+	<h4>5. <{$prounixname}></h4>
+
+	<{$reg_step5}>
+	<p/><{$reg_unixname}>:
+	<br/>
+
+	<input type='text' maxlength='15' SIZE='15' name='unix_name' value='<{$unix_name}>'>
+
+	<h4>6. <{$repositoryinfo}></h4>	
+	<p>This project will use:<br />
+		<{html_radios name="repository" options=$repository_options selected=$repository separator="<br />"}>
+	<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type='checkbox' <{$anon_cvs}> name='anon_cvs'>Allow Anonymous Access to your source<br/>
+	</p>
+	<input type='hidden' name='reload' value='<{$reload}>'>
+	<table width='100%'>
+	<tr>
+	<td align='right'>
+	<input type='button' name='submit' onclick="window.location.replace('tos.php');" value='<{$back}>' style='width:100px;'>
+	</td>
+
+	<td align='left'>
+	<input type='submit' name='submit' value='<{$finish}>' style='width:100px;'>
+	</td>
+
+	</tr>
+	</table>
+
+	</form>
+
+<{else}>
+  <{$url}>
+<{/if}>

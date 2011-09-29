@@ -1,0 +1,45 @@
+<script language=javascript>
+function verify(commname) {
+        msg = "Remove association with community ";
+        msg += commname;
+        msg += ".";
+        return confirm(msg);
+}
+</script>
+
+<{$project_title}>
+<{$project_tabs}>
+<{if $feedback }><div class='errorMsg'><{$feedback}></div><{/if}>
+<{$project_admin_header}>
+<table width='100%' cellpadding='2' cellspacing='2' border='0'>
+	<tr valign='top'>
+		<td id="centerLcolumn" width='50%'>
+			<{include file="$modules_rootpath/xfmod/templates/xfmod_groupblock.html" title="$misc_title" content="$misc_content"}>
+		</td>
+		<td>&nbsp;</td>
+		<td id="centerRcolumn" width='50%'>
+			<{include file="$modules_rootpath/xfmod/templates/xfmod_groupblock.html" title="$members_title" content="$members_content"}>
+		</td>
+	</tr>
+    <tr valign=top>
+		<td id="centerLcolumn" width='50%'>
+		<{if $isProject == true}>
+
+			<{include file="$modules_rootpath/xfmod/templates/xfmod_groupblock.html" title="$cvs_title" content="$cvs_content"}>
+		</td>
+		<td>&nbsp;</td>
+		<td id="centerRcolumn"  width='50%'>
+		<{/if}>
+			<{include file="$modules_rootpath/xfmod/templates/xfmod_groupblock.html" title="$comm_title" content="$comm_content"}>
+		</td>
+	</tr>
+    <tr valign=top>
+		<td id="centerLcolumn" width='50%'>
+			<{include file="$modules_rootpath/xfmod/templates/xfmod_groupblock.html" title="$tool_title" content="$tool_content"}>
+		</td>
+		<td>&nbsp;</td>
+		<td id="centerRcolumn" width='50%'>
+			<{include file="$modules_rootpath/xfmod/templates/xfmod_groupblock.html" title="$file_title" content="$file_content"}>
+		</td>
+	</tr>
+</table>

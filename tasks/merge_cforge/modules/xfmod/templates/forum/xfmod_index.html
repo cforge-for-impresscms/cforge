@@ -1,0 +1,24 @@
+<strong>
+<{if $isForumAdmin == true}>
+<a href='admin/index.php?group_id=<{$group_id}>'><strong><{$admin_label}></strong></a>
+<{/if}>
+<{if $noforums == true}>
+	<p/><strong><{$noforums_message}></strong>
+	<{$dberror}>
+<{else}>
+	<p><{$choose_forum}></p>
+	<{section name=i loop=$forums}>
+		<a href='forum.php?forum_id=<{$forums[i].group_forum_id}>'>
+			<img src='<{$icms_url}>/modules/xfmod/images/ic/cfolder15.png' width='15' height='13' border='0' alt=''>
+			&nbsp;<{$forums[i].forum_name}></a>
+			(<{$forums[i].total}> msgs)
+			<BR><{$forums[i].description}><p>
+	<{/section}>
+	<{section name=i loop=$extforums}>
+		<img src='<{$icms_url}>/modules/xfmod/images/ic/cfolder15.png' width="15"height="13" border="0" alt=''>
+		&nbsp;<{$extforums[i].forum_name}>
+		<a href="http://developer-forums.novell.com/group/<{$extforums[i].forum_name}>/readerNoFrame.tpt/@thread@first@f@10@D-D,D@none/@article@first">[HTTP]</a>
+		<a href="news://developer-forums.novell.com/<{$extforums[i].forum_name}>">[NNTP]</a>	  
+		<p>
+	<{/section}>
+<{/if}>

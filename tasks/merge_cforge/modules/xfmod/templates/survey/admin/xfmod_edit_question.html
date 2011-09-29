@@ -1,0 +1,40 @@
+<{$survey_header}>
+
+<script language="JavaScript">
+<!--
+var timerID2 = null;
+
+function show_questions() {
+   newWindow = open("","occursDialog","height=600,width=700,scrollbars=yes,resizable=yes");
+   newWindow.location=('show_questions.php?popup=1&group_id=<{$group_id}>');
+}
+// -->
+</script>
+
+<p><font color="blue"><strong style='font-size:12px;align:left;'>
+If you change an existing question after users have already responded<br/>
+to a survey that contains it, it is highly likely your existing results<br/>
+will be garbled or misleading.<br/>
+It is usually a better idea to create a new one.
+</strong></font></p>
+
+<form action="edit_question.php" method="POST">
+<input type="hidden" name="post_changes" value="Y">
+<input type="hidden" name="group_id" value="<{$group_id}>">
+<input type="hidden" name="question_id" value="<{$question_id}>">
+
+<p><strong>Question ID: <{$question_id}></strong></p>
+
+<p>
+<{$sur_question}>:
+<br/>
+<input type="text" name="question" value="<{$question}>" size="60" maxlength="150">
+
+<p>
+<{$sur_question_type}>
+<BR>
+
+<{$html_build_select_box}>
+<br/><br/><a class='bg4' href='javascript:show_questions()'>Display Available Questions</a>
+
+<p><input type="submit" name="submit" value="<{$submit}>"></form>

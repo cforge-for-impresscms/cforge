@@ -1,0 +1,5 @@
+- Geen admin link als forums-link geen forums bevat!!!
+- Toevoegen news items aan sys_news_group gaat fout
+- hele news gebeuren gaat nog helemaal fout
+
+- next update block is leeg als je niet in de directoy <<site>>/XF/ zit :?

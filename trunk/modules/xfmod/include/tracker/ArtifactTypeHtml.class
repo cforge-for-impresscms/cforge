@@ -1,0 +1,273 @@
+<?php
+/**
+  *
+  * SourceForge Generic Tracker facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: ArtifactTypeHtml.class,v 1.3 2003/11/26 16:27:35 jcox Exp $
+  *
+  */
+require_once(XOOPS_ROOT_PATH."/modules/xfmod/include/tracker/ArtifactType.class");
+
+class ArtifactTypeHtml extends ArtifactType {
+
+	/**
+	 *  ArtifactType() - constructor
+	 *
+	 *  @param $Group object
+	 *  @param $artifact_type_id - the id # assigned to this artifact type in the db
+	 */
+	function ArtifactTypeHtml(&$Group,$artifact_type_id=false) {
+		return $this->ArtifactType($Group,$artifact_type_id);
+	}
+
+	function header() {
+		global $xoopsUser, $feedback;
+
+		$group_id = $this->Group->getID();
+
+		$content['title'] = project_title($this->Group);
+		    //echo "<B style='font-size:16px;align:left;'>".$this->getName()."</B><br />";
+		    $tabselect = "tracker";
+		    if ($this->getName()=="Patches")  
+			$tabselect = "patch";
+		    if ($this->getName()=="Bugs")  
+			$tabselect = "bugs";
+		    if ($this->getName()=="Support Requests")  
+			$tabselect = "support";
+		    if ($this->getName()=="Feature Requests")  
+			$tabselect = "feature";    
+
+		$content['tabs'] = project_tabs($tabselect, $group_id);
+
+		$nav = '<P/>';
+		
+		if($this->userIsAdmin()){		
+			$nav .= "<B><A HREF='".XOOPS_URL."/modules/xfmod/tracker/admin/?group_id=".$group_id."'>"._XF_G_ADMIN."</A> | </B>";
+		}
+		    
+		$nav .= "<B>"
+		    ."<A HREF='".XOOPS_URL."/modules/xfmod/tracker/?func=browse&group_id=".$group_id."&atid=".$this->getID()."'>"._XF_G_BROWSE."</A>"
+				." | "
+				."<A HREF='".XOOPS_URL."/modules/xfmod/tracker/?func=add&group_id=".$group_id."&atid=".$this->getID()."'>"._XF_TRK_ATHSUBMITNEW."</A>";
+		$nav .= "</B>";
+		
+		//if ($feedback)
+		//  $content .= "<p><b style='color:#FF0000;'>".$feedback."</b></p>";
+		
+		$content['nav'] = $nav;
+		
+		//echo '<HR NoShade SIZE="1" SIZE="90%">';
+		return $content;
+	}
+
+	function footer() {
+	  //global $xoopsTheme;
+          //CloseTable();
+          //include (XOOPS_ROOT_PATH."/footer.php");
+	}
+
+	function adminHeader() {
+	  global $feedback;
+		
+		$adminheader = $this->header();
+		$group_id= $this->Group->getID();
+		//$nav = "<B>"._XF_TRK_ATHADMINFUNCTIONS.": <A HREF='".XOOPS_URL."/modules/xfmod/tracker/admin/?group_id=".$group_id."'>"._XF_TRK_ATHADDBROWSETYPES."</A>";
+		$nav = " | <B><A HREF='".XOOPS_URL."/modules/xfmod/tracker/admin/?group_id=".$group_id."&atid=".$this->getID()."'>".sprintf(_XF_TRK_ATHEDITUPDATEOPTIONS, $this->getName())."</A></B>";
+		
+		$adminheader['nav'] .= $nav;
+		
+		return $adminheader;
+	}
+
+	function categoryBox ($name='category_id',$checked='xzxz',$text_100=_XF_G_NONE) {
+		return html_build_select_box($this->getCategories(),$name,$checked,true,$text_100);
+	}
+
+	function artifactGroupBox ($name='artifact_group_id',$checked='xzxz',$text_100=_XF_G_NONE) {
+		return html_build_select_box($this->getGroups(),$name,$checked,true,$text_100);
+	}
+
+	function technicianBox ($name='assigned_to',$checked='xzxz',$show_100=true,$text_100=_XF_G_NONE) {
+		return html_build_select_box($this->getTechnicians(),$name,$checked,$show_100,$text_100);
+	}
+
+	function cannedResponseBox ($name='canned_response',$checked='xzxz') {
+		return html_build_select_box($this->getCannedResponses(),$name,$checked);
+	}
+
+	function statusBox ($name='status_id',$checked='xzxz',$show_100=false,$text_100=_XF_G_NONE) {
+		return html_build_select_box($this->getStatuses(),$name,$checked,$show_100,$text_100);
+	}
+
+	function resolutionBox ($name='resolution_id',$checked='xzxz',$show_100=false,$text_100=_XF_G_NONE) {
+		return html_build_select_box($this->getResolutions(),$name,$checked,$show_100,$text_100);
+	}
+
+	function showBrowseList ($result,$offset,$set='open') {
+		global $sys_datefmt,$PHP_SELF, $xoopsDB, $ts;
+		$group_id=$this->Group->getID();
+
+		$IS_ADMIN = $this->userIsAdmin();
+		
+		$content = '';
+		
+		if ($IS_ADMIN) {
+			$content .= "<FORM NAME='artifactList' ACTION='".$PHP_SELF."?group_id=".$group_id."&atid=".$this->getID()."' METHOD='POST'>"
+			    ."<INPUT TYPE='HIDDEN' NAME='func' VALUE='massupdate'>";
+		}
+
+		$content .= "<TABLE cellspacing='1' cellpadding='5' width='100%' border='0'>"
+		    ."<TR class='bg2'>";
+		if ($IS_ADMIN) {
+		  $content .= "<TD width='1%' align='center'><input name='allbox' type='checkbox' onClick='checkAll();' title='"._XF_TRK_ATHSELECTALL."'></td>";
+		}		
+		$content .= "<TD align='center'><b>"._XF_TRK_ATHREQID."</b></td>"
+				."<TD align='center'><b>"._XF_G_SUMMARY."</b></td>";
+				
+		if ($this->useResolution()) {
+		  $content .= "<TD align='center'><b>"._XF_TRK_ATHRESOLUTION."</b></td>";
+		}
+		
+		$content .= "<td align='center'><b>"._XF_G_DATE."</b></td>"
+				."<TD align='center'><b>"._XF_G_ASSIGNEDTO."</b></td>"
+				."<TD align='center'><b>"._XF_G_SUBMITTEDBY."</b></td>"
+				."</TR>";
+
+		$then = (time() - $this->getDuePeriod());
+		$rows = $xoopsDB->getRowsNum($result);
+		
+		for ($i=0; $i < $rows; $i++) {
+			$content .= "<TR BGCOLOR='".get_priority_color(unofficial_getDBResult($result, $i, 'priority'))."'>";
+			if ($IS_ADMIN) {
+			  $content .= "<td width='1%'>"
+				    ."<input name='artifact_id_list[]' type='checkbox' onClick='checkOne(this);' value='".unofficial_getDBResult($result, $i, 'artifact_id')."'>"
+						."</td>"; 
+			}
+			$content .= "<td nowrap>".unofficial_getDBResult($result, $i, 'artifact_id')."</td>"
+					."<TD><A HREF='".$PHP_SELF."?func=detail&aid=".unofficial_getDBResult($result, $i, 'artifact_id')
+					."&group_id=".$group_id."&atid=".$this->getID()."'>"
+					.$ts->makeTboxData4Show(unofficial_getDBResult($result, $i, 'summary'))."</A></TD>";
+
+			if ($this->useResolution()) {
+			  $content .= "<TD>".unofficial_getDBResult($result, $i, 'resolution_name')."</TD>";
+			}
+			
+			$content .= "<TD>".(($set != 'closed' && unofficial_getDBResult($result, $i, 'date') < $then)?"<B>* ":"&nbsp; ").date($sys_datefmt,unofficial_getDBResult($result, $i, 'date')) ."</TD>"
+			    ."<TD>".unofficial_getDBResult($result, $i, 'assigned_to')."</TD>"
+					."<TD>".unofficial_getDBResult($result, $i, 'submitted_by')."</TD></TR>";
+		}
+
+		/*
+			Show extra rows for <-- Prev / Next -->
+		*/
+		if (($offset > 0) || ($rows >= 50)) {
+			$content .= "<TR><TD COLSPAN='2'>";
+			if ($offset > 0) {
+				$content .= '<A HREF="'.$PHP_SELF.'?func=browse&group_id='.$group_id.'&atid='.$this->getID().'&set='.$set.'&offset='.($offset-50).'"><B><-- '._XF_G_PREVIOUS.' 50</B></A>';
+			} else {
+				$content .= '&nbsp;';
+			}
+			$content .= '</TD><TD>&nbsp;</TD><TD COLSPAN="2">';
+	
+			if ($rows >= 50) {
+				$content .= '<A HREF="'.$PHP_SELF.'?func=browse&group_id='.$group_id.'&atid='.$this->getID().'&set='.$set.'&offset='.($offset+50).'"><B>'._XF_G_NEXT.' 50 --></B></A>';
+			} else {
+				$content .= '&nbsp;';
+			}
+			$content .= '</TD></TR>';
+		}
+
+		/*
+			Mass Update Code
+		*/
+		if ($IS_ADMIN) {
+			$content .= '<script language="JavaScript">
+	    <!-- 
+	      function checkAll() {
+				  
+		      al = document.artifactList;
+		      var i = 0;
+		      for( i = 0; i < al.elements.length; i++) {
+					  var e = al.elements[i];
+			      if (al.elements[i].name == \'artifact_id_list[]\') {
+						  al.elements[i].checked = al.allbox.checked;
+						}
+					}
+				}
+
+	      function checkOne(item) {
+				  
+					if (!item.checked && document.artifactList.allbox.checked) {
+					  document.artifactList.allbox.checked=0;
+						return;
+					}
+					if (item.checked) {
+		        al = document.artifactList;
+		        var cnt = 0;
+						var pnt = 0;
+		        for(var i = 0; i < al.elements.length; i++) {
+					    var e = al.elements[i];
+			        if (e.name == \'artifact_id_list[]\') {
+							  pnt++;
+								if (e.checked) {
+							    cnt++;
+								}
+						  }
+					  }
+						if (cnt == pnt) {
+						  document.artifactList.allbox.checked=1;
+						}
+					}
+				}
+	    //-->
+	    </script>
+			<TR><TD COLSPAN="6">
+
+			<FONT COLOR="#FF0000"><B>'._XF_G_ADMIN.':</B></FONT> '._XF_TRK_ATHIFAPPLYTOALL.'
+			<br />
+			<TABLE WIDTH="100%" BORDER="0">
+
+			<TR>
+			<TD><B>'._XF_TRK_ATHCATEGORY.':</B><BR>'. $this->categoryBox ('category_id','xzxz',_XF_G_NOCHANGE) .'</TD>
+			<TD><B>'._XF_TRK_ATHGROUP.':</B><BR>'. $this->artifactGroupBox ('artifact_group_id','xzxz',_XF_G_NOCHANGE) .'</TD>
+			</TR>
+
+			<TR>
+			<TD><B>'._XF_G_PRIORITY.':</B><BR>';
+			$content .= build_priority_select_box ('priority', 'xzxz',_XF_G_NOCHANGE);
+			$content .= '</TD><TD>';
+			if ($this->useResolution()) {
+				$content .= '
+				<B>'._XF_TRK_ATHRESOLUTION.':</B><BR>';
+				$content .= $this->resolutionBox('resolution_id','xzxz',true,_XF_G_NOCHANGE);
+			} else { 
+				$content .= '&nbsp;
+				<INPUT TYPE="HIDDEN" NAME="resolution_id" VALUE="100">';
+			}
+
+			$content .= '</TD>
+			</TR>
+
+			<TR>
+			<TD><B>'._XF_G_ASSIGNEDTO.':</B><BR>'. $this->technicianBox ('assigned_to','xzxz',true,_XF_G_NOCHANGE) .'</TD>
+			<TD><B>'._XF_TRK_ATHSTATUS.':</B><BR>'. $this->statusBox ('status_id','xzxz',true,_XF_G_NOCHANGE) .'</TD>
+			</TR>
+
+			<TR><TD COLSPAN="2"><B>'._XF_TRK_ATHCANNEDRESP.':</B><BR>'. $this->cannedResponseBox ('canned_response') .'</TD></TR>
+
+			<TR><TD COLSPAN="3" ALIGN="MIDDLE"><INPUT TYPE="SUBMIT" name="submit" VALUE="'._XF_TRK_ATHMASSUPDATE.'"></TD></TR>
+
+			</TABLE>
+			</FORM>
+			</TD></TR>';
+		}
+		$content .= '</TABLE>';
+		return $content;
+	}
+}
+
+?>

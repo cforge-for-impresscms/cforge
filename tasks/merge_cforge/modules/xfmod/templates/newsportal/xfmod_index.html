@@ -1,0 +1,20 @@
+<{$project_title}>
+<{$project_tabs}>
+<strong>
+<{if $isForumAdmin == true}>
+<a href='admin/index.php?group_id=<{$group_id}>'><strong><{$admin_label}></strong></a>
+<{/if}>
+<{if $noforums == true}>
+	<h4><{$noforums_message}></h4>
+	<{$dberror}>
+<{else}>
+	<p><{$choose_forum}></p>
+	<{section name=i loop=$extforums}>
+		<img src='<{$icms_url}>/modules/xfmod/images/ic/cfolder15.png' width="15"height="13" border="0" alt=''>
+		&nbsp;<{$extforums[i].forum_desc_name}>(<{$extforums[i].num_posts}>)
+		<a href="<{$icms_url}>/modules/xfmod/newsportal/thread.php?group_id=<{$group_id}>&group=<{$extforums[i].forum_name}>">[HTTP]</a>
+		<a href="news://<{$nntp_server}>/<{$extforums[i].forum_name}>">[NNTP]</a>
+		<a href="<{$icms_url}>/modules/xfmod/newsportal/rssfeed.php?group_id=<{$group_id}>&group=<{$extforums[i].forum_name}>"><img src="<{$icms_url}>/modules/xfmod/newsportal/img/xml.gif" width="36" height="14" border="0" alt="RSS Feed"></a>
+		<p>
+	<{/section}>
+<{/if}>

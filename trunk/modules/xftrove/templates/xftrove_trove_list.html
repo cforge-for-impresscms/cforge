@@ -1,0 +1,35 @@
+<{$displayTroveHeader}> 
+<{if $feedback }><div class='errorMsg'><{$feedback}></div><{/if}>
+<FONT size="-1"><FONT color="#FF0000">Now limiting view to projects in the following categories:</FONT>
+
+<P/>
+
+<{$discrim_desc}>
+
+<TABLE width=100% border="0" cellspacing="0" cellpadding="0">
+  <TR valign="top">
+    <TD><FONT face="arial, helvetica" size="3">
+
+      <{$content}>
+
+    </TD>
+    <TD><FONT face="arial, helvetica" size="3">
+
+      Browse by:
+
+      <{$content2}> 
+      <BR/>
+      <{$content3}>
+    </TD>
+  </TR>
+</TABLE>
+
+<HR noshade>
+
+<SPAN><CENTER><FONT size="-1">
+      <{$html_limit}> 
+</FONT></CENTER></SPAN>
+
+<HR noshade>
+
+      <{$content4}>

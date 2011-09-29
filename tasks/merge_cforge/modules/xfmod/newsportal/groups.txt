@@ -1,0 +1,4 @@
+:<b>Some groups</b>
+test.group
+novell.devsup.clib.xplatnlm
+novell.community.chat

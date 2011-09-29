@@ -1,0 +1,17 @@
+<{$project_title}>
+<{$project_tabs}>
+<{$news_header}>
+<{if $feedback }><div class='errorMsg'><{$feedback}></div><{/if}>
+<P>
+<FORM ACTION="<{$form_action}>" METHOD="POST">
+<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="<{$group_id}>">
+<B><{$title}>: <{$group_name}></B>
+<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
+<P>
+<B><{$subject}>:</B><BR>
+<INPUT TYPE="TEXT" NAME="summary" VALUE="" SIZE="30" MAXLENGTH="60">
+<P>
+<B><{$details}>:</B><BR>
+<TEXTAREA NAME="details" ROWS="5" COLS="50" WRAP="SOFT"></TEXTAREA><BR>
+<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="<{$submit}>">
+</FORM>

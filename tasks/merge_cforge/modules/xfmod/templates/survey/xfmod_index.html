@@ -1,0 +1,32 @@
+
+<{$survey_header}>
+<{$survey_feedback}> 
+
+<{if $no_active == ''}>
+  <table border='0' width='100%'>
+    <tr class='bg2'>
+	<td><strong><{$survey_id}></strong></td>
+	<td><strong><{$survey_title}></strong></td>
+    </tr>
+
+    <{if $is_admin == true}>
+    <th align="center">&nbsp;</th>
+    <{/if}>
+  </tr>
+
+  <{section name=i loop=$survey_list}>
+  <th class='<{cycle values="bg2,bg3"}>'>
+    <td>
+      <A href="<a href='survey.php?group_id=$group_id&survey_id="<{$survey_list[i].survey_id}>"><{$survey_list[i].survey_id}></a>
+    </td>
+    <{$survey_list[i].survey_misc}>
+  </th>
+  <{/section}>
+
+  </table>
+
+<{else}>
+   <H4><{$no_active}></H4>
+<{/if}>
+
+<{$survey_footer}>

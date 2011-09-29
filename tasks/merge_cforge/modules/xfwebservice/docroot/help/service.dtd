@@ -1,0 +1,38 @@
+<!-- General -->
+<!ELEMENT error (#PCDATA)*>
+<!ATTLIST error id ID #REQUIRED>
+
+<!ELEMENT list (list|error|build|file|publish)*>
+<!ATTLIST list name CDATA #IMPLIED>
+
+<!-- Authentication -->
+<!ELEMENT session EMPTY>
+<!ATTLIST session id ID #REQUIRED>
+
+<!ELEMENT success EMPTY>
+
+<!-- Build -->
+<!ELEMENT target EMPTY>
+<!ATTLIST target name (fedora-1-i386|mandrake-92-i586|redhat-9-i386|suse-82-i586|suse-90-i586|suse-91-i586) #REQUIRED>
+
+<!ELEMENT build (error)?>
+<!ATTLIST build
+	id ID #REQUIRED
+	project CDATA #REQUIRED
+	modules CDATA #REQUIRED
+	target CDATA #REQUIRED
+	status (pending|active|succeeded|failed) #REQUIRED
+	elapsed CDATA #REQUIRED
+	start CDATA #REQUIRED
+	end CDATA #IMPLIED>
+
+<!-- Publish -->
+<!ELEMENT file (target)+>
+<!ATTLIST file
+	id ID #REQUIRED
+	name CDATA #REQUIRED>
+
+<!ELEMENT publish (error)?>
+<!ATTLIST publish
+	id ID #REQUIRED
+	status (pending|active|succeeded|failed) #REQUIRED>

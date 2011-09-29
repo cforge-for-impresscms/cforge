@@ -1,0 +1,284 @@
+<{$account_header}>
+
+<table id="centercolumn" width="100%" border="0">
+	<tr>
+	<td id="centerLcolumn" valign="top" width="50%">
+
+		<!-- MY PROJECTS -->
+		<table border="0" width="100%" cellspacing="0" cellpadding="0">
+		   <tr>
+			<td width="14"><img src="<{$xoops_imageurl}>images/h_arrow.gif" width="14" height="26" border="0" alt=""></td>
+			<td width="100%" class="head3" valign="bottom">
+			  <div class="blockTitle"><{$prj_comm_block_title}></div>
+			</td>
+		   </tr>
+		   <tr>
+			<td colspan="2"  height="1" style="background-image:url(<{$xoops_imageurl}>images/dotlinebg_horiz.gif)"><img src="<{$xoops_imageurl}>images/spacer.gif" width="1" height="1" alt=""></td>
+		   </tr>
+		   <tr>
+			<td width="14"><img src="<{$xoops_imageurl}>images/spacer.gif" width="14" height="7" alt=""></td>
+			<td width="100%"><img src="<{$xoops_imageurl}>images/spacer.gif" width="1" height="7" alt=""></td>
+		   </tr>
+		   <tr>
+			<td colspan="2">
+			  <div class="blockContent">
+				<{if $no_projects == true}>
+					<table border="0" width='100%'>
+					<tr><td colspan='2'><{$prj_comm_content}></td></tr>
+					</table>
+				<{else}>
+					<table border="0" width='100%'>
+					<{section name=i loop=$prj_list}>
+					<tr class='<{cycle name="projects" values="bg3,bg3"}>'>
+						<td align='middle'>
+						<{if stristr($prj_list[i].admin_flags, 'A') == false}>
+							<a href="rmproject.php?group_id=<{$prj_list[i].group_id}>"><img src='../xfmod/images/ic/trash.png' alt='DELETE' height='16' width='16' border='0'></a>
+						<{else}>
+							<img src='../xfmod/images/ic/trash-x.png' alt='DELETE' height='16' width='16' border='0'>
+						<{/if}>
+						</td>
+						<td width="99%"><a href="../xfmod/<{if $prj_list[i].type == 1}>project<{else}>community<{/if}>/?<{$prj_list[i].unix_group_name}>"><{$prj_list[i].group_name}> <i><{$prj_list[i].status}></i></a></td>
+					</tr>
+					<{/section}>
+					</table>
+				<{/if}>
+			  </div>
+			</td>
+  		   </tr>
+		</table>		
+
+
+		<!-- MY ASSIGNED ITEMS -->
+		<table border="0" width="100%" cellspacing="0" cellpadding="0">
+		   <tr>
+			<td width="14"><img src="<{$xoops_imageurl}>images/h_arrow.gif" width="14" height="26" border="0" alt=""></td>
+			<td width="100%" class="head3" valign="bottom">
+			  <div class="blockTitle"><{$assigned_items_title}></div>
+			</td>
+		   </tr>
+		   <tr>
+			<td colspan="2"  height="1" background="<{$xoops_imageurl}>images/dotlinebg_horiz.gif"><img src="<{$xoops_imageurl}>images/spacer.gif" width="1" height="1" alt=""></td>
+		   </tr>
+		   <tr>
+			<td width="14"><img src="<{$xoops_imageurl}>images/spacer.gif" width="14" height="7" alt=""></td>
+			<td width="100%"><img src="<{$xoops_imageurl}>images/spacer.gif" width="1" height="7" alt=""></td>
+		   </tr>
+		   <tr>
+			<td colspan="2">
+			  <div class="blockContent">
+				<table border="0" width='100%'>
+					<{$assigned_items_content}>
+				</table>
+			  </div>
+			</td>
+  		   </tr>
+		</table>
+
+		<!-- MY SUBMITTED ITEMS -->
+		<table border="0" width="100%" cellspacing="0" cellpadding="0">
+		   <tr>
+			<td width="14"><img src="<{$xoops_imageurl}>images/h_arrow.gif" width="14" height="26" border="0" alt=""></td>
+			<td width="100%" class="head3" valign="bottom">
+			  <div class="blockTitle"><{$submitted_items_title}></div>
+			</td>
+		   </tr>
+		   <tr>
+			<td colspan="2"  height="1" background="<{$xoops_imageurl}>images/dotlinebg_horiz.gif"><img src="<{$xoops_imageurl}>images/spacer.gif" width="1" height="1" alt=""></td>
+		   </tr>
+		   <tr>
+			<td width="14"><img src="<{$xoops_imageurl}>images/spacer.gif" width="14" height="7" alt=""></td>
+			<td width="100%"><img src="<{$xoops_imageurl}>images/spacer.gif" width="1" height="7" alt=""></td>
+		   </tr>
+		   <tr>
+			<td colspan="2">
+			  <div class="blockContent">
+				<table border="0" width='100%'>
+					<{$submitted_items_content}>
+				</table>
+			  </div>
+			</td>
+  		   </tr>
+		</table>
+
+		<!-- MONITORED FORUMS -->
+		<!--
+		<table border="0" width="100%" cellspacing="0" cellpadding="0">
+		   <tr>
+			<td width="14"><img src="<{$xoops_imageurl}>images/h_arrow.gif" width="14" height="26" border="0" alt=""></td>
+			<td width="100%" class="head3" valign="bottom">
+			  <div class="blockTitle"><{$forums_title}></div>
+			</td>
+		   </tr>
+		   <tr>
+			<td colspan="2"  height="1" background="<{$xoops_imageurl}>images/dotlinebg_horiz.gif"><img src="<{$xoops_imageurl}>images/spacer.gif" width="1" height="1" alt=""></td>
+		   </tr>
+		   <tr>
+			<td width="14"><img src="<{$xoops_imageurl}>images/spacer.gif" width="14" height="7" alt=""></td>
+			<td width="100%"><img src="<{$xoops_imageurl}>images/spacer.gif" width="1" height="7" alt=""></td>
+		   </tr>
+		   <tr>
+			<td colspan="2">
+			  <div class="blockContent">
+				<table border="0" width='100%'>
+					<{$forums_content}>
+				</table>
+			  </div>
+			</td>
+  		   </tr>
+		</table>
+		-->
+		<!-- MONITORED FILES -->
+		<table border="0" width="100%" cellspacing="0" cellpadding="0">
+		   <tr>
+			<td width="14"><img src="<{$xoops_imageurl}>images/h_arrow.gif" width="14" height="26" border="0" alt=""></td>
+			<td width="100%" class="head3" valign="bottom">
+			  <div class="blockTitle"><{$files_title}></div>
+			</td>
+		   </tr>
+		   <tr>
+			<td colspan="2"  height="1" background="<{$xoops_imageurl}>images/dotlinebg_horiz.gif"><img src="<{$xoops_imageurl}>images/spacer.gif" width="1" height="1" alt=""></td>
+		   </tr>
+		   <tr>
+			<td width="14"><img src="<{$xoops_imageurl}>images/spacer.gif" width="14" height="7" alt=""></td>
+			<td width="100%"><img src="<{$xoops_imageurl}>images/spacer.gif" width="1" height="7" alt=""></td>
+		   </tr>
+		   <tr>
+			<td colspan="2">
+			  <div class="blockContent">
+				<table border="0" width='100%'>
+					<{$files_content}>
+				</table>
+			  </div>
+			</td>
+  		   </tr>
+		</table>
+	</td>
+	<td id="centerRcolumn" valign="top" width="50%">
+
+		<!-- MY TASKS -->
+		<table border="0" width="100%" cellspacing="0" cellpadding="0">
+		   <tr>
+			<td width="14"><img src="<{$xoops_imageurl}>images/h_arrow.gif" width="14" height="26" border="0" alt=""></td>
+			<td width="100%" class="head3" valign="bottom">
+			  <div class="blockTitle"><{$tasks_title}></div>
+			</td>
+		   </tr>
+		   <tr>
+			<td colspan="2" height="1" background="<{$xoops_imageurl}>images/dotlinebg_horiz.gif"><img src="<{$xoops_imageurl}>images/spacer.gif" width="1" height="1" alt=""></td>
+		   </tr>
+		   <tr>
+			<td width="14"><img src="<{$xoops_imageurl}>images/spacer.gif" width="14" height="7" alt=""></td>
+			<td width="100%"><img src="<{$xoops_imageurl}>images/spacer.gif" width="1" height="7" alt=""></td>
+		   </tr>
+		   <tr>
+			<td colspan="2">
+			  <div class="blockContent">
+				<table border="0" width='100%'>
+					<{$tasks_content}>
+				</table>
+			  </div>
+			</td>
+  		   </tr>
+		</table>
+
+		<{if $display_survey == true}>
+		<!-- SURVEY -->
+		<table border="0" width="100%" cellspacing="0" cellpadding="0">
+		   <tr>
+			<td width="14"><img src="<{$xoops_imageurl}>images/h_arrow.gif" width="14" height="26" border="0" alt=""></td>
+			<td width="100%" class="head3" valign="bottom">
+			  <div class="blockTitle"><{$survey_title}></div>
+			</td>
+		   </tr>
+		   <tr>
+			<td colspan="2"  height="1" background="<{$xoops_imageurl}>images/dotlinebg_horiz.gif"><img src="<{$xoops_imageurl}>images/spacer.gif" width="1" height="1" alt=""></td>
+		   </tr>
+		   <tr>
+			<td width="14"><img src="<{$xoops_imageurl}>images/spacer.gif" width="14" height="7" alt=""></td>
+			<td width="100%"><img src="<{$xoops_imageurl}>images/spacer.gif" width="1" height="7" alt=""></td>
+		   </tr>
+		   <tr>
+			<td colspan="2">
+			  <div class="blockContent">
+				<form action='../xfmod/survey/survey_resp.php' method='post'>
+					<input type='hidden' name='group_id' value='1'>
+					<input type='hidden' name='survey_id' value=''> 
+					<table>
+						<{$survey_content}>
+					</table>
+				</form>
+			  </div>
+			</td>
+  		   </tr>
+		</table>
+		<{/if}>
+
+		<!-- BOOKMARKS -->
+		<table border="0" width="100%" cellspacing="0" cellpadding="0">
+		   <tr>
+			<td width="14"><img src="<{$xoops_imageurl}>images/h_arrow.gif" width="14" height="26" border="0" alt=""></td>
+			<td width="100%" class="head3" valign="bottom">
+			  <div class="blockTitle"><{$bookmarks_title}></div>
+			</td>
+		   </tr>
+		   <tr>
+			<td colspan="2"  height="1" background="<{$xoops_imageurl}>images/dotlinebg_horiz.gif"><img src="<{$xoops_imageurl}>images/spacer.gif" width="1" height="1" alt=""></td>
+		   </tr>
+		   <tr>
+			<td width="14"><img src="<{$xoops_imageurl}>images/spacer.gif" width="14" height="7" alt=""></td>
+			<td width="100%"><img src="<{$xoops_imageurl}>images/spacer.gif" width="1" height="7" alt=""></td>
+		   </tr>
+		   <tr>
+			<td colspan="2">
+			  <div class="blockContent">
+				<table border="0" width='100%'>
+				<{if $bookmarks_count == 0}>
+					<tr><td colspan='2'><{$bookmarks_none}></td></tr>
+				<{else}>
+					<{section name=bookmark loop=$bookmarks_list}>
+					<tr class="<{cycle name="bookmarks" values="bg3,bg3"}>">
+						<td align="center">
+							<a href="bookmark_delete.php?bookmark_id=<{$bookmarks_list[bookmark].bookmark_id}>"><img src='../xfmod/images/ic/trash.png' height='16' width='16' border='0' alt='Delete'></a>
+						</td>
+						<td width="99%">
+							<a href="<{$bookmarks_list[bookmark].bookmark_url}>"><b><{$bookmarks_list[bookmark].bookmark_title}></b></a> &nbsp;
+							[<a href="bookmark_edit.php?bookmark_id=<{$bookmarks_list[bookmark].bookmark_id}>">Edit</a>]
+						</td>
+					</tr>
+					<{/section}>
+				<{/if}>
+					<tr><td colspan='2'><a href="bookmark_add.php"><{$bookmarks_add}></a></td></tr>
+				</table>
+			  </div>
+			</td>
+		   </tr>
+		</table>
+
+		<br/>
+
+		<!-- MAILING LISTS -->
+		<table border="0" width="100%" cellspacing="0" cellpadding="0">
+		   <tr>
+			<td width="14"><img src="<{$xoops_imageurl}>images/h_arrow.gif" width="14" height="26" border="0" alt=""></td>
+			<td width="100%" class="head3" valign="bottom">
+			  <div class="blockTitle"><{$list_title}></div>
+			</td>
+		   </tr>
+		   <tr>
+			<td colspan="2"  height="1" background="<{$xoops_imageurl}>images/dotlinebg_horiz.gif"><img src="<{$xoops_imageurl}>images/spacer.gif" width="1" height="1" alt=""></td>
+		   </tr>
+		   <tr>
+			<td width="14"><img src="<{$xoops_imageurl}>images/spacer.gif" width="14" height="7" alt=""></td>
+			<td width="100%"><img src="<{$xoops_imageurl}>images/spacer.gif" width="1" height="7" alt=""></td>
+		   </tr>
+		   <tr>
+			<td colspan="2">
+			  <div class="blockContent"><{$list_content}></div>
+			</td>
+		   </tr>
+		</table>
+	</td>
+	</tr>
+
+	<tr><td colspan="2"><{$priority_colors}></td></tr>
+</table>

@@ -1,0 +1,26 @@
+<{$survey_header}>
+
+<script language='JavaScript'></script>
+
+<p><font color="blue"><b style='font-size:12px;align:left;'>
+If you change an existing survey after users have already responded,<br/>
+it is highly likely your existing results will be garbled or misleading.<br/>
+It is usually a better idea to de-activate a survey and create a new one.
+</b></font></p>
+
+<P>
+<FORM name="qform" ACTION="edit_survey.php" METHOD="POST"
+	onSubmit="return questOnSubmit()">
+<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="<{$group_id}>">
+<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
+<B><{$survey_name}>:</B>
+<BR>
+<INPUT TYPE="HIDDEN" NAME="survey_id" VALUE="<{$survey_id}>">
+<INPUT TYPE="TEXT" NAME="survey_title" VALUE="<{$survey_title}>" LENGTH="60" MAXLENGTH="150">
+
+<P>
+<B><{$is_active}></B>
+<{$checked}>
+<P>
+<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="<{$submit}>">
+</FORM>

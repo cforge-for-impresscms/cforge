@@ -1,0 +1,93 @@
+#! /usr/bin/perl -w
+#
+#This is a mock of pgpverify.  This script will verify that the control message's
+#body is signed with a valid rsa signature.  If the signature is valid, it will 
+#return the name of the approving person for the control message.  Much of this 
+#is taken from pgpverify.
+#
+# written 05 Nov 2003, Paul Jones (pjones@novell.com)
+#
+# Version 0.1
+#
+
+#path to uudecode utility
+$uudecode = "/usr/bin/uudecode";
+
+#path to openssl utility
+$openssl = "/usr/local/ssl/bin/openssl";
+
+#path to public certificate
+$pubcert = "/twister/tools/rsapub.pem";
+
+
+my ($nntp_format, $header, $dup, $body) = &parse_header();
+my ($ok, $signer) = &rsa_verify($header, $body);
+print "$signer\n" if $signer;
+unless ($ok == 0){
+	print "$0: verification failed\n";
+	exit 255;
+}
+exit $ok;
+
+# Parse the article headers and return a flag saying whether the message
+# is in NNTP format and then two references to hashes.  The first hash
+# contains all the header/value pairs, and the second contains entries for
+# every header that's duplicated.  This is, by design, case-sensitive with
+# regards to the headers it checks.  It's also insistent about the
+# colon-space rule.
+sub parse_header {
+  my (%header, %dup, $label, $value, $nntp_format, $body);
+  while (<>) {
+    # If the first header line ends with \r\n, this article is in the
+    # encoding it would be in during an NNTP session.  Some article
+    # storage managers keep them this way for efficiency.
+    $nntp_format = /\r\n$/ if $. == 1;
+    s/\r?\n$//;
+                                                                                                                                                  
+    last if /^$/;
+    if (/^(\S+):[ \t](.+)/) {
+      ($label, $value) = ($1, $2);
+      $dup{$label} = 1 if $header{$label};
+      $header{$label} = $value;
+    } elsif (/^\s/) {
+      &fail("$0: non-header at line $.: $_\n") unless $label;
+      $header{$label} .= "\n$_";
+    } else {
+      &fail("$0: non-header at line $.: $_\n");
+    }
+  }
+  while (<>){
+    $body .= $_;
+  }
+#  $messageid = $header{'Message-ID'};
+  return ($nntp_format, \%header, \%dup, $body);
+}
+
+# The body of the message must be the Date, Message-ID, and Control
+# values from the header in a rsa signed, uuencoded format.  Each
+# value must be separated by a newline.
+#
+# Example:
+# Fri,  7 Nov 2003 15:35:08 -0700
+# <1068244508.47142@novell.com>
+# newgroup novell.forge.rsatest
+
+sub rsa_verify {
+  my ($header, $body) = @_;
+  $body =~ s/\\/\\\\/gs;
+  $body =~ s/"/\\"/gs;
+  $body =~ s/\$/\\\$/gs;
+  $body =~ s/`/\\`/gs;
+  
+  $headers = `echo "$body" | $uudecode -p /dev/stdin | $openssl rsautl -verify -pubin -inkey $pubcert`;
+
+  return ($?, "RSA verify failed") if $? != 0;
+  
+  @test = split /\n/, $headers;
+  return (255, "Invalid Signed Date") if $$header{'Date'} ne $test[0];
+  return (255, "Invalid Signed Message-ID") if $$header{'Message-ID'} ne $test[1];
+  return (255, "Invalid Signed Control") if $$header{'Control'} ne $test[2];
+  
+  return ($?, $$header{'Approved'});
+}
+

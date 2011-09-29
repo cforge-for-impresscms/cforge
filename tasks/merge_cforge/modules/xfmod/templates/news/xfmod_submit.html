@@ -1,0 +1,17 @@
+<{$project_title}>
+<{$project_tabs}>
+<{$news_header}>
+<{if $feedback }><div class='errorMsg'><{$feedback}></div><{/if}>
+<p>
+<form action="<{$form_action}>" method="POST">
+<input type="hidden" name="group_id" value="<{$group_id}>">
+<strong><{$title}>: <{$group_name}></strong>
+<input type="hidden" name="post_changes" value="y">
+<p>
+<strong><{$subject}>:</strong><BR>
+<input type="text" name="summary" value="" size="30" maxlength="60">
+<p>
+<strong><{$details}>:</strong><BR>
+<textarea name="details" rows="5" cols="50" WRAP="SOFT"></textarea><BR>
+<input type="submit" name="submit" value="<{$submit}>">
+</form>

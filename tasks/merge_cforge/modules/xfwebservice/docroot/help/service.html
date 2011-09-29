@@ -1,0 +1,411 @@
+<html>
+<head>
+	<title>Novell Forge Web Service API</title>
+	<style type="text/css">
+		h1 {margin-bottom:0px;}
+		#copy {margin-top:0px;}
+		#privileges {margin-left:1em;}
+		#privileges td {padding:0px 3px 0px 3px;text-align:center;}
+		#privileges .group {padding-top:2px;text-align:left; vertical-align:top;}
+		#privileges .label {text-align:left;}
+		.api {margin-left:1em;font-family:monospace;}
+		.api .label {padding-right:7px;vertical-align:top;text-align:right;}
+	</style>
+</head>
+<body>
+	<h1>Novell Forge Web Service API</h1>
+	<p id="copy">&copy;2004 Novell, Inc.</p>
+
+	<h2>General</h2>
+	<p>
+		Forge provides two fully functional URLs for making web service API calls.&nbsp;
+		The unencrypted URL is provided for clients that do not support SSL connections.
+	</p>
+	<ul>
+		<li><a href="https://secure-forge.novell.com/api/">https://secure-forge.novell.com/api/</a></li>
+		<li><a href="http://forge.novell.com/api/">http://forge.novell.com/api/</a></li>
+	</ul>
+	<p>
+		HTTP methods are used in accordance with the HTTP specification as follows:
+	</p>
+	<ul>
+		<li><code>GET</code> - Retrieves a resource without modifying the state of the server.</li>
+		<li><code>POST</code> - Submits information to a process running on the server (changes the state of the server).</li>
+	</ul>
+	<p>
+		Web service API calls may be protected or unprotected.&nbsp;
+		Users who wish to make protected API calls must first authenticate themselves to the server.&nbsp;
+		The following types of users may make the listed API calls:
+	</p>
+	<table id="privileges" border="1" cellspacing="0" cellpadding="0">
+		<tr>
+			<td>Group</td>
+			<td>Command</td>
+			<td>System Admin</td>
+			<td>Project Admin</td>
+			<td>Release Admin</td>
+			<td>Release Technician</td>
+			<td>Anyone</td>
+		</tr>
+		<tr>
+			<td class="group" rowspan="5"><code>help</code></td>
+			<td class="label"><code>help</code></td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+		</tr>
+		<tr>
+			<td class="label"><code>api</code></td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+		</tr>
+		<tr>
+			<td class="label"><code>dtd</code></td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+		</tr>
+		<tr>
+			<td class="label"><code>errors</code></td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+		</tr>
+		<tr>
+			<td class="label"><code>phpinfo</code></td>
+			<td>yes</td>
+			<td>-</td>
+			<td>-</td>
+			<td>-</td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td class="group" rowspan="2"><code>auth</code></td>
+			<td class="label"><code>login</code></td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+		</tr>
+		<tr>
+			<td class="label"><code>logout</code></td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+		</tr>
+		<tr>
+			<td class="group" rowspan="4"><code>build</code></td>
+			<td class="label"><code>targets</code></td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+		</tr>
+		<tr>
+			<td class="label"><code>start</code></td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td class="label"><code>status</code></td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td class="label"><code>debug</code></td>
+			<td>yes</td>
+			<td>-</td>
+			<td>-</td>
+			<td>-</td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td class="group" rowspan="3"><code>publish</code></td>
+			<td class="label"><code>files</code></td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>-</td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td class="label"><code>start</code></td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>-</td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td class="label"><code>status</code></td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>yes</td>
+			<td>-</td>
+			<td>-</td>
+		</tr>
+	</table>
+	<p>
+		A description of the Web service API follows.&nbsp;
+		You may <a href="?c=dtd">view the DTD</a> for more accurate information.
+	</p>
+
+	<h2>Help API</h2>
+	<p>
+		A user may request help from the server.&nbsp;
+		Available help includes: this overview, the API description, the DTD, a localized error list, and PHP information.
+	</p>
+	<table class="api" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td class="label">Method:</td>
+			<td>GET - https://secure-forge.novell.com/api/help/</td>
+		</tr>
+		<tr>
+			<td class="label">Method:</td>
+			<td>GET - https://secure-forge.novell.com/api/help/?c=api</td>
+		</tr>
+		<tr>
+			<td class="label">Method:</td>
+			<td>GET - https://secure-forge.novell.com/api/help/?c=dtd</td>
+		</tr>
+		<tr>
+			<td class="label">Method:</td>
+			<td>GET - https://secure-forge.novell.com/api/help/?c=errors</td>
+		</tr>
+		<tr>
+			<td class="label">Method:</td>
+			<td>GET - https://secure-forge.novell.com/api/help/?c=phpinfo</td>
+		</tr>
+	</table>
+
+
+	<h2>Authentication API</h2>
+	<p>
+		A user authenticates themselves by providing their username and password to the server.&nbsp;
+		The server verifies that the password for the user is correct and creates a new session.
+	</p>
+	<table class="api" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td class="label">Method:</td>
+			<td>POST - https://secure-forge.novell.com/api/auth/?c=login&amp;u=pjones&amp;p=oocha</td>
+		</tr>
+		<tr>
+			<td class="label">Examples:</td>
+			<td>
+				&lt;session id="111"/&gt;<br/>
+				&lt;error id="10"&gt;Description of error 10&lt;/error&gt;<br/>
+			</td>
+		</tr>
+	</table>
+	<p>
+		A user may terminate their session and logout of the server by providing their session ID.&nbsp;
+		The server automatically destroys sessions that are either idle or old.&nbsp;
+		Both time limits are configurable.
+	</p>
+	<table class="api" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td class="label">Method:</td>
+			<td>POST - https://secure-forge.novell.com/api/auth/?c=logout&amp;s=111</td>
+		</tr>
+		<tr>
+			<td class="label">Examples:</td>
+			<td>
+				&lt;success/&gt;<br/>
+				&lt;error id="10"&gt;Description of error 10&lt;/error&gt;<br/>
+			</td>
+		</tr>
+	</table>
+	<p>
+		Future additions include:
+	</p>
+	<ul>
+		<li>Implementing idle session timeout feature</li>
+	</ul>
+
+	<h2>Build API</h2>
+	<p>
+		A user may request a list of available targets.
+	</p>
+	<table class="api" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td class="label">Method:</td>
+			<td>GET - https://secure-forge.novell.com/api/build/?c=targets</td>
+		</tr>
+		<tr>
+			<td class="label">Examples:</td>
+			<td>
+				&lt;list&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&lt;target name="suse-90-i586"/&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&lt;target name="suse-82-i586"/&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&lt;target name="fedora-1-i386"/&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&lt;target name="redhat-9-i386"/&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&lt;target name="mandrake-92-i586"/&gt;<br/>
+				&lt;/list&gt;<br/>
+				&lt;error id="10"&gt;Description of error 10&lt;/error&gt;<br/>
+			</td>
+		</tr>
+	</table>
+	<p>
+		An authorized user may start a build process by providing the project short name, the CVS module, the target, and their session ID.&nbsp;
+		A valid <code>ximian-build.conf</code> file must exist in a <code>build</code> directory within the given module.&nbsp; 
+		The build process will create RPM files using source code available in the project's CVS repository.&nbsp;
+		Those files are made available in a file release on the Forge website.
+	</p>
+	<table class="api" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td class="label">Method:</td>
+			<td>POST - https://secure-forge.novell.com/api/build/?c=start&amp;n=ldapcsharp&amp;m=CsharpLDAP&amp;t=suse-90-i586&amp;s=111</td>
+		</tr>
+		<tr>
+			<td class="label">Examples:</td>
+			<td>
+				&lt;build id="222" project="ldapcsharp" modules="mod1" target="suse-90-i586" status="pending" elapsed="3" start="123456789"/&gt;<br/>
+				&lt;error id="10"&gt;Description of error 10&lt;/error&gt;<br/>
+			</td>
+		</tr>
+	</table>
+	<p>
+		An authorized user may check the status of a build process by providing the build ID and their session ID, the project name and their session ID, or just their session ID.
+	</p>
+	<table class="api" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td class="label">Method:</td>
+			<td>GET - https://secure-forge.novell.com/api/build/?c=status&amp;b=222&amp;s=111</td>
+		</tr>
+		<tr>
+			<td class="label">Examples:</td>
+			<td>
+				&lt;build id="222" project="ldapcsharp" modules="mod1" target="suse-90-i586" status="pending" elapsed="3" start="123456789"/&gt;<br/>
+				&lt;build id="222" project="ldapcsharp" modules="mod1" target="suse-90-i586" status="active" elapsed="123" start="123456789"/&gt;<br/>
+				&lt;build id="222" project="ldapcsharp" modules="mod1" target="suse-90-i586" status="succeeded" elapsed="1234" start="123456789" end="123556789"/&gt;<br/>
+				&lt;build id="222" project="ldapcsharp" modules="mod1" target="suse-90-i586" status="failed" elapsed="1234" start="123456789" end="123556789"&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&lt;error id="20"&gt;Description of error 20&lt;/error&gt;<br/>
+				&lt;/build&gt;<br/>
+				&lt;error id="10"&gt;Description of error 10&lt;/error&gt;<br/>
+			</td>
+		</tr>
+	</table>
+	<p>
+		An administrator may debug the build process by providing a method name, 1 or 2 optional parameters, and their session ID.&nbsp;
+		These commands are directed to the master of the build cluster using XML-RPC.
+	</p>
+	<table class="api" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td class="label">Method:</td>
+			<td>GET - https://secure-forge.novell.com/api/build/?c=debug&amp;m=ping&amp;s=111</td>
+		</tr>
+	</table>
+	<p>
+		Future additions include:
+	</p>
+	<ul>
+		<li>Canceling a build</li>
+		<li>Retrieving logs from builds (if Files API?)</li>
+		<li>Builds will be automatically cancelled after some timeout of not finishing?</li>
+	</ul>
+
+	<h2>Publish API</h2>
+	<p>
+		An authorized user may request a list of publishable RPM files for a given project by providing the project short name and their session ID.&nbsp;
+		The file list is a hierarchy of files and file lists.
+	</p>
+	<table class="api" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td class="label">Method:</td>
+			<td>GET - https://secure-forge.novell.com/api/publish/?c=list&amp;n=forge&amp;s=111</td>
+		</tr>
+		<tr>
+			<td class="label">Examples:</td>
+			<td>&lt;list name="LDAP Libraries for C"&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&lt;list name="NDK Binaries - AIX"&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;file id="120" name="cldap_doc-1.2.1.rpm"&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;target name="suse-90-i586"/&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/file&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;file id="120" name="cldap_src-1.2.1.src.rpm"&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;target name="suse-90-i586"/&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/file&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;list name="October 2003"&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;file id="123" name="cldap_api-1.2.1-23.rpm"&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;target name="suse-90-i586"/&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/file&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;file id="124" name="cldap2_api-1.2.1-15.rpm"&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;target name="suse-90-i586"/&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;target name="suse-82-i586"/&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/file&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/list&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;list name="June 2003"&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;file id="125" name="cldap_api-1.2.0-17.rpm"&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;target name="suse-90-i586"/&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/file&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/list&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&lt;/list&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&lt;list name="NDK Binaries - Linux"&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;list name="October 2003"&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;file id="126" name="cldap_api-1.2.1-88.rpm"&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;target name="suse-90-i586"/&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/file&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/list&gt;<br/>
+				&nbsp;&nbsp;&nbsp;&lt;/list&gt;<br/>
+				&lt;/list&gt;<br/>
+				&lt;error id="10"&gt;Description of error 10&lt;/error&gt;<br/>
+			</td>
+		</tr>
+	</table>
+	<p>
+		An authorized user may publish a file by providing the file ID and their session ID.&nbsp;
+		The RPM files are added to the project's channel in Red Carpet.
+	</p>
+	<table class="api" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td class="label">Method:</td>
+			<td>POST - https://secure-forge.novell.com/api/publish/?c=start&amp;f=123&amp;s=111</td>
+		</tr>
+		<tr>
+			<td class="label">Examples:</td>
+			<td>
+				&lt;publish id="222" status="pending"/&gt;<br/>
+				&lt;error id="10"&gt;Description of error 10&lt;/error&gt;<br/>
+			</td>
+		</tr>
+	</table>
+	<p>
+		An authorized user may check the status of a publish process by providing the publish ID and their session ID.
+	</p>
+	<table class="api" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td class="label">Method:</td>
+			<td>GET - https://secure-forge.novell.com/api/publish/?c=status&amp;p=222&amp;s=111</td>
+		</tr>
+		<tr>
+			<td class="label">Examples:</td>
+			<td>
+				&lt;publish id="222" status="pending"/&gt;<br/>
+				&lt;publish id="222" status="active"/&gt;<br/>
+				&lt;publish id="222" status="completed"/&gt;<br/>
+				&lt;publish id="222" status="failed"&gt;&lt;error id="20"&gt;Description of error 20&lt;/error&gt;&lt;/publish&gt;<br/>
+				&lt;error id="10"&gt;Description of error 10&lt;/error&gt;<br/>
+			</td>
+		</tr>
+	</table>
+
+</body>
+</html>

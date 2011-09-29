@@ -1,0 +1,338 @@
+<?php
+/**
+ * A base permissions class.
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id: Permission.class,v 1.5 2003/12/04 21:17:50 jcox Exp $
+ *
+ */
+
+require_once(XOOPS_ROOT_PATH."/modules/xfmod/include/Error.class");
+require_once(XOOPS_ROOT_PATH."/class/xoopsmodule.php");
+
+$PERMISSION_OBJ=array();
+
+/**
+ * permission_get_object() - Get permission objects
+ *
+ * permission_get_object is useful so you can pool Permission objects/save database queries
+ * You should always use this instead of instantiating the object directly 
+ *
+ * @param		object	The Group in question
+ * @param		object	The User needing Permission
+ * @return a Permission or false on failure
+ *
+ */
+function &permission_get_object(&$_Group, &$_User) {
+	//create a common set of Permission objects
+	//saves a little wear on the database
+	
+	global $PERMISSION_OBJ;
+
+	if (is_object($_Group)) {
+		$group_id = $_Group->getID();
+	} else {
+		$group_id = 0;
+	}
+
+	if (is_object($_User)) {
+		$user_id = $_User->getVar("uid");
+	} else {
+		//invalid object, probably from user not being logged in
+		$user_id = 0;
+	}
+
+	if (!isset($PERMISSION_OBJ["_".$group_id."_".$user_id])) {
+		$PERMISSION_OBJ["_".$group_id."_".$user_id]= new Permission($_Group, $_User);
+	}
+	return $PERMISSION_OBJ["_".$group_id."_".$user_id];
+}
+
+class Permission extends Error {
+  var $db;
+	/**
+	 * Associative array of data from db
+	 *
+	 * @var array $data_array
+	 */
+	var $data_array;
+
+	/**
+	 * The Group object
+	 *
+	 * @var object $Group
+	 */
+	var $Group;
+
+	/**
+	 * The User object
+	 *
+	 * @var object $User
+	 */
+	var $User;
+
+	/**
+	 * Whether the user is an admin/super user of this project
+	 *
+	 * @var bool $is_admin
+	 */
+	var $is_admin=false;
+
+	/**
+	 * Whether the user is an admin/super user of the entire site
+	 *
+	 * @var bool $is_site_admin
+	 */
+	var $is_site_admin;
+
+	/**
+	 *	Constructor for this object
+	 *
+	 *	@param	object	Group Object required
+	 *	@param	object	User Object required
+	 *	
+	 */
+	function Permission (&$_Group, &$_User) {
+	  global $xoopsDB;
+		
+	  $this->db = $xoopsDB;
+		if (!$_Group || !is_object($_Group)) {
+			$this->setError(''._XF_PER_NOVALIDGROUPOBJECT);
+			return false;
+		}
+		if ($_Group->isError()) {
+			$this->setError('Permission: '.$_Group->getErrorMessage());
+			return false;
+		}
+		$this->Group =& $_Group;
+
+		if (/*!$_User || */!is_object($_User)) {
+			$this->setError(''._XF_PER_NOVALIDUSEROBJECT);
+			$this->User = NULL;
+		  return false;
+		}
+		$this->User =& $_User;
+
+		if (!$this->fetchData()) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	/**
+	 *  fetchData() - fetch the data for this Permission from the database
+	 *
+	 *  @return true/false
+	 *	@access private
+	 */
+	function fetchData() {
+		$res = $this->db->query("SELECT * FROM ".$this->db->prefix("xf_user_group")." " 
+			                      ."WHERE user_id='". $this->User->getVar("uid") ."' "
+					      ."AND group_id='". $this->Group->getID() ."'");
+														
+		if (!$res || $this->db->getRowsNum($res) < 1) {
+			$this->setError('Permission: '._XF_PER_USERNOTFOUND);
+
+		} else {
+			$this->data_array = $this->db->fetchArray($res);
+
+		}
+	}
+
+	/**
+	 *	setUpSuperUser() - check to see if this User is a site super-user
+	 *
+	 *	@return true/false
+	 *	@access private
+	 */
+	function setUpSuperUser() {
+		//
+		//  see if they are a site super-user
+		//  if not a member of this group
+		//
+		if ($this->isSuperUser()) {
+			$this->clearError();
+			$this->is_admin = true;
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 *	getUser() - get the User object this Permission is associated with
+	 *
+	 *	@return the User object
+	 */
+	function &getUser() {
+		return $this->User;
+	}
+
+	/**
+	 *	getGroup() - get the Group object this ArtifactType is associated with
+	 *
+	 *	@return the Group object
+	 */
+	function &getGroup() {
+		return $this->Group;
+	}
+
+	/**
+	 *  isSuperUser() - whether the current user has site admin privilege
+	 *
+	 *  @return true/false
+	 */
+	function isSuperUser() {
+		if ($this->User != NULL) {
+			$xfmod = XoopsModule::getByDirname ("xfmod");
+			return $this->User->isAdmin($xfmod->mid());
+		} 
+		else {
+			return false;
+		}
+	}
+
+	/**
+	 *  isAdmin() - User is an admin of the project or admin of the entire site
+	 *
+	 *  @return true/false
+	 */
+	function isAdmin() {
+		if (trim($this->data_array['admin_flags']) == 'A') {
+			return true;
+		} 
+		else {
+			return $this->isSuperUser();
+		}
+	}
+
+	/**
+	 *  isProjectAdmin() - User is an admin of the project
+	 *
+	 *  @return true/false
+	 */
+	function isProjectAdmin() {
+		if (trim($this->data_array['admin_flags']) == 'A') {
+			return true;
+		} 
+		else {
+			return false;
+		}
+	}
+
+	/**
+	 *  isReleaseAdmin() - whether the current user has FRS release admin perms
+	 *
+	 *  @return true/false
+	 */
+	function isReleaseAdmin() {
+		if ($this->isMember('release_flags',2) || $this->isMember('release_flags',3)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	/**
+	 *  isReleaseTechnician() - whether the current user has FRS admin perms
+	 *
+	 *  @return true/false
+	 */
+	function isReleaseTechnician() {
+		if ($this->isMember('release_flags',1) || $this->isMember('release_flags',2)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	/**
+	 *  isForumAdmin() - whether the current user has form admin perms
+	 *
+	 *  @return true/false
+	 */
+	function isForumAdmin() {
+		return $this->isMember('forum_flags',2);
+	}
+
+	/**
+	 *  isDocEditor() - whether the current user has form doc editor perms
+	 *
+	 *  @return true/false
+	 */
+	function isDocEditor() {
+		return $this->isMember('doc_flags',1);
+	}
+	
+	/**
+	 *  isSampleEditor() - whether the current user has form sample editor perms
+	 *
+	 *  @return true/false
+	 */
+	function isSampleEditor() {
+		return $this->isMember('sample_flags',1);
+	}	
+
+	/**
+	 *  useIsArtifactAdmin() - whether the current user has artifact admin perms
+	 *
+	 *  @return true/false
+	 */
+	function isArtifactAdmin() {
+		return $this->isMember('artifact_flags',2);
+	}
+
+	function isPMAdmin() {
+		return $this->isMember('project_flags',2);
+	}
+
+	/**
+	 *  isMember() - Simple test to see if the current user is a member of this project
+	 *
+	 *  Can optionally pass in vars to test other permissions
+	 *
+	 *  @param string	The field to check
+	 *  @param int		The value that $field should have
+	 *  @return true/false
+	 */
+	function isMember($field='user_id', $value='-1') {
+		if ($this->isAdmin()) {
+			//admins are tested first so that super-users can return true
+			//and admins of a project should always have full privileges 
+			//on their project
+			return true;
+		} 
+		else {
+			$arr =& $this->getPermData();
+			if ($field == 'user_id') {
+			  if ($arr[$field] == $value) {
+				  return true; 
+			  }
+			} 
+			else {
+			  if ($arr[$field] >= $value) {
+				  return true; 
+			  }
+			}
+		}
+		return false;
+	}
+
+	/**
+	 *	getPermData() - returns the assocative array from the db
+	 *
+	 *	@return associative array
+	 *	@access private
+	 */
+	function &getPermData() {
+		return $this->data_array;
+	}
+}
+
+?>

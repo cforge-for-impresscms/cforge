@@ -1,0 +1,9 @@
+3 * * * * /usr/bin/php -q /var/www/forge/html/modules/xfmod/cronjobs/update_artifact.php
+9 * * * * /usr/bin/php -q /var/www/forge/html/modules/xfmod/cronjobs/update_docs.php
+15 * * * * /usr/bin/php -q /var/www/forge/html/modules/xfmod/cronjobs/update_forum.php
+21 * * * * /usr/bin/php -q /var/www/forge/html/modules/xfmod/cronjobs/update_inactive_projects.php
+27 * * * * /usr/bin/php -q /var/www/forge/html/modules/xfmod/cronjobs/update_log.php
+33 * * * * /usr/bin/php -q /var/www/forge/html/modules/xfmod/cronjobs/update_projectmetrics.php
+39 * * * * /usr/bin/php -q /var/www/forge/html/modules/xfmod/cronjobs/update_trove.php
+45 * * * * /usr/bin/php -q /var/www/forge/html/modules/xfmod/cronjobs/newslettercron.php
+51 * * * * mysqlhotcopy -u root -p novell -h localhost --keepold nforge /backup

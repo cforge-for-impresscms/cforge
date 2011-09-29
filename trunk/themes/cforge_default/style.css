@@ -1,0 +1,495 @@
+/****************************************************************************/
+/*------------------- CSS FOR XOOPS 2.0.3 or later -------------------------*/
+
+/* This controls the default settings on a page */
+body {	color: #000000;	background: #FFFFFF;margin: 0;	padding: 0;	font-size: 12px;}
+
+/* The default settings for ALL tables on a site, unless explicity defined for a particular table */
+table {	width: 100%;	padding: 0px;}
+tr, td {
+	font-family: Verdana, Tahoma, Arial;
+	font-size: 12px;
+	color: #000000;
+	padding: 0px; vertical-align: top;
+}
+
+/* This controls the default link settings & link mouseover/hover settings */
+a {color:  #3A4F6C; text-decoration: none; font-weight: bold; background-color: transparent;}
+a:hover {color: #3366CC;}
+
+/* Controls HTML tags for headings #1-5, unordered list and items in the list */
+h1 {}
+h2 {}
+h3 {}
+h4 {}
+h5 {}
+
+/* unordered list and items in the list */
+ul {
+	margin: 2px;
+	padding: 2px;
+	list-style: square inside;
+	text-align: left;
+	color: #333333;
+	line-height: 18px;
+}
+li {
+	list-style: square url(images/list.gif) inside;
+	color: #999999;
+}
+li a{
+	list-style: square url(images/list.gif) inside;
+	font-size: 12px;
+}
+
+/****************************************************************************/
+/* NOT INCLUDED IN DEFAULT */
+/* start */
+/*-- The default settings for horizontal line --*/
+hr {color:#9FBCE3; height:1px;}
+
+/*--  textarea, select, input in form --*/
+textarea, select, input  {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	padding: 2px 2px 1px 2px; color: #465584;
+
+	font-size: 12px;
+}
+/* end */
+
+/****************************************************************************/
+/* Selector for a form button */
+
+input.formButton {}
+
+/****************************************************************************/
+/* The following appear to primarily apply to the NEWS stories, */
+/* though they may be found in other areas as well */
+/*
+BEGIN NEWS SECTION DEALING PRIMARILY WITH NEWS
+*/
+
+/* The border around news stories */
+.item {
+ background-color:  #F5F9FD;
+	border: 1px solid #5780C0;
+	padding: 1px;
+}
+
+/* The BG color for the cell for news story titles */
+.itemHead {
+	background-image: url(images/item_title.gif); 
+	background-color: #D1DCEB; color: Black; 
+	font-weight: bold;
+	font-size: 12px; 
+	padding: 3px 5px 5px 25px;
+	background-repeat: no-repeat;
+	border-bottom: 1px solid White;
+	border-left: 1px solid White;
+	border-right: 1px solid White;
+}
+
+/* The BG color for the area right under a news title (post by so-and-so) */
+.itemInfo {
+	color: #666666; text-align: right;
+	padding: 5px 5px 5px 5px;
+	background-color: #EEF2F7;
+	border-bottom: 1px solid White;
+	border-left: 1px solid White;
+	border-right: 1px solid White;
+}
+
+/* The text in the story title EXCEPT the colon between the topic and the title */
+.itemTitle a {
+	color: #465584;
+	font-weight: bold; font-size: 12px;
+}
+
+.itemTitle a:hover{
+	color: #3366CC;
+}
+
+/* The text "exta6sy" just preceding the posters name */
+.itemPoster {}
+
+/* The text On $date $time immediately after the posters name */
+.itemPostDate {}
+
+/* The xx # reads for a story, but NOT the parenthesis surrounding the total */
+.itemStats {}
+
+/* The text of the story itself */
+.itemBody {padding-left: 5px;  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;	border-left: 1px solid White;
+	border-right: 1px solid White; }
+
+/* XOOPS DEVELOPER HELP NEEDED - This seems to be the same as .itemBody above. What is the difference??? */
+.itemText {  line-height: 1.6em;  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; }
+
+/* Makes the first letter in a story bold */
+.itemText:first-letter {}
+
+/* The foooter of a new story (read more, etc.) */
+.itemFoot {
+	border-top: 1px solid White;	border-left: 1px solid White;
+	border-right: 1px solid White;
+	text-align: right;
+	padding: 5px 5px 5px 5px;
+	color: #999999;
+	 background-color: #EEF2F7;
+}
+.itemFoot a{color: #465584}
+
+/* The [edit | delete] section of a news footer */
+.itemAdminLink {}
+
+/* The [edit | delete] section of a news footer */
+.itemPermaLink {}
+
+/*
+END SECTION DEALING PRIMARILY WITH NEWS
+*/
+
+/****************************************************************************/
+
+/* Controls the settings for a table header */
+th {}
+
+/* The area at the top of the page where the logo and advertising banner are */
+td#headerbanner {}
+
+/* The whitish-grey bar on the default install right underneath the top section/header */
+td#headerbar {}
+
+/****************************************************************************/
+/*
+BEGIN SECTION DEALING WITH THE THREE COLUMNS
+*/
+
+/* controls the settings for blocks on the LEFT side of the page */
+td#leftcolumn {width: 170px; font-size:12px; background-color: #FFFFFF;}
+
+/* controls the settings for the table headers on the left column */
+td#leftcolumn th {	background-color:#9FBCE3;
+	vertical-align: middle;
+	padding: 5px;
+	color: #3A4F6C;
+	background-image: url(images/sub_title.gif);
+	background-repeat: repeat-x;}
+
+/* controls the settings for the block titles on the left column */
+td#leftcolumn div.blockTitle {
+	width: 164px;
+	padding:6px 2px 2px;
+	color:  #FFFFFF;
+	font-weight: bold;
+	font-size: 12px;
+	background-image: url(images/title.gif);
+	background-repeat: repeat-x;
+	border-top: 1px solid #4C77B6;
+	border-right: 1px solid #4C77B6;
+	border-left: 1px solid #4C77B6;
+	background-color: #6899DB;
+}
+
+/* controls the settings for the blocks' content on the left column */
+td#leftcolumn div.blockContent {
+	padding: 4px;
+	line-height: 120%;
+	border: 1px solid #4C77B6;
+	background: #FAFCFE;
+}
+
+/* controls the settings for block in the CENTER section of the page */
+td#centercolumn {
+	font-size: 12px;
+	line-height: 20px;
+	padding: 0px 10px 10px; 
+}
+
+/* controls the settings for the table headers on the center column */
+td#centercolumn th {
+	background-color:#9FBCE3;
+	vertical-align: middle;
+	padding: 5px;
+	color: #3A4F6C;
+	background-image: url(images/sub_title.gif);
+	background-repeat: repeat-x;
+}
+
+/* Controls the settings for "center-aligned CENTER blocks" on the page */
+td#centerCcolumn {padding: 0px 3px 1px 3px;}
+
+/* The title for center center blocks */
+td#centerCcolumn div.blockTitle {
+	color:  #FFFFFF;
+	font-weight: bold;
+	font-size: 12px;
+	background-image: url(images/title.gif);
+	background-repeat: repeat-x;
+	border-top: 1px solid #4C77B6;
+	border-right: 1px solid #4C77B6;
+	border-left: 1px solid #4C77B6;
+	background-color: #6899DB;
+	padding: 6px 2px 2px;
+	height: 18px;
+}
+
+/* The content for center center blocks */
+td#centerCcolumn div.blockContent {
+	padding: 4px;
+	line-height: 120%;
+	border: 1px solid #4C77B6;
+	background: #FAFCFE;
+}
+
+/* Controls the settings for "left-aligned CENTER blocks" on the page */
+td#centerLcolumn {width: 50%; padding: 0px 3px 0px 5px;}
+
+/* The title for left-aligned center blocks*/
+td#centerLcolumn div.blockTitle {	
+	padding:6px 2px 2px;
+	color:  #FFFFFF;
+	font-weight: bold;
+	font-size: 12px;
+	background-image: url(images/title.gif);
+	background-repeat: repeat-x;
+	border-top: 1px solid #4C77B6;
+	border-right: 1px solid #4C77B6;
+	border-left: 1px solid #4C77B6;
+	background-color: #6899DB;
+}
+
+/* The content for left-aligned center blocks */
+td#centerLcolumn div.blockContent {		padding: 4px;
+	line-height: 120%;
+	border: 1px solid #4C77B6;
+	background: #FAFCFE;}
+
+/* Controls the settings for "right-aligned CENTER blocks on the page */
+td#centerRcolumn {width: 50%; padding: 0px 3px 0px 3px;}
+
+/* The title for right-aligned center blocks */
+td#centerRcolumn div.blockTitle {		padding:6px 2px 2px;
+	color:  #FFFFFF;
+	font-weight: bold;
+	font-size: 12px;
+	background-image: url(images/title.gif);
+	background-repeat: repeat-x;
+	border-top: 1px solid #4C77B6;
+	border-right: 1px solid #4C77B6;
+	border-left: 1px solid #4C77B6;
+	background-color: #6899DB;;}
+
+/* The content area for left-aligned center blocks */
+td#centerRcolumn div.blockContent {		padding: 4px;
+	line-height: 120%;
+	border: 1px solid #4C77B6;
+	background: #FAFCFE;}
+
+/* Controls everything defined as content. for example in news it controls: */
+/* The article text, posted by, date, time & number of reads Including the parenthesis */
+/* the [ | ] brackets around the admin edit section and also the disclaimer: "the comments are */
+/* owned by the poster. We aren't responsible for their content" on the bottom of a news comments page */
+/* also a ton of text on the forum page...probably a ton of stuff everywhere...be careful with this one */
+
+div#content     {text-align: left;  padding: 8px 3px 8px 3px;  }
+
+/* project navigation (NOT INCLUDED IN DEFAULT) */
+span#projectnav {text-align: left;  padding: 8px 3px 8px 3px;  font:-2pt }
+
+/* referecence value */
+/* div#content {text-align: left; padding: 8px; font:14px arial,sans-serif;} */
+/* span#projectnav {text-align: left; padding: 8px; font:12px arial,sans-serif;} */
+
+/* settings for blocks in the RIGHT column on a page*/
+td#rightcolumn {width:170px; font-size:12px;}
+
+/* Controls the table headers for the right columns.*/
+td#rightcolumn th {	background-color:#9FBCE3;
+	vertical-align: middle;
+	padding: 5px;
+	color: #3A4F6C;
+	background-image: url(images/sub_title.gif);
+	background-repeat: repeat-x;}
+
+/* Controls the right column blocks' titles */
+td#rightcolumn div.blockTitle {
+	width: 164px;
+	padding:6px 2px 2px;
+	color:  #FFFFFF;
+	font-weight: bold;
+	font-size: 12px;
+	background-image: url(images/title.gif);
+	background-repeat: repeat-x;
+	border-top: 1px solid #4C77B6;
+	border-right: 1px solid #4C77B6;
+	border-left: 1px solid #4C77B6;
+	background-color: #6899DB;
+}
+
+/* Controls the right column blocks' content area */
+td#rightcolumn div.blockContent {
+	padding: 4px;
+	line-height: 18px;
+	border: 1px solid #4C77B6;
+	background: #FAFCFE;
+}
+
+/* END SECTION DEALING WITH THREE COLUMNS */
+/****************************************************************************/
+
+/* settings for the footerbar where the xoops copyright notice is */
+td#footerbar { color: #000000; height: 30px; vertical-align: middle; text-align: center;  font-weight: normal;  font-size: 11px;   }
+
+/****************************************************************************/
+/* settings for the Main Menu */
+td#mainmenu a { padding: 2px 2px 2px  ; 	color:#3A4F6C;}
+
+/* What happens on a mouse hover on the main menu */
+td#mainmenu a:hover { color : #3366CC;}
+
+/* The top cell on the main menu (typically HOME). This way you can give the top cell a different border or */
+/* other appearance. Useful for drawing a box around the entire menu, for instance. */
+td#mainmenu a.menuTop { padding: 2px 2px 0px 10px; }
+
+/* The remaining entries in the main menu other than the top most defined one line above */
+td#mainmenu a.menuMain {padding: 2px 2px 0px 10px;}
+
+/* The settings for submenu items that open when u are in a particular module. For example */
+/* "Submit news" and "Archives" when you are on the news module */
+td#mainmenu a.menuSub {
+	padding-left: 24px;
+	background: url(images/arrows2.gif) no-repeat;
+	font-weight: normal;
+}
+
+/****************************************************************************/
+/* settings for the User Menu */
+td#usermenu a {margin: 0; padding: 2px 2px 0px 10px; 	color: #3A4F6C;
+background: no-repeat;	font-weight: normal;
+}
+/* What happens on a mouse hover on the user menu */
+td#usermenu a:hover {color : #3366cc;}
+
+/* The top most entry on the user menu */
+td#usermenu a.menuTop {}
+
+/* The settings for when a user has a private message */
+td#usermenu a.highlight {}
+
+/****************************************************************************/
+/* Styles used to draw homogeneous tables */
+/* Described in a seperate page in the xoops.org wiki */
+.outer { background-color: #ffffff;  border: 1px solid #5780C0;  }
+.head  { background-color: #D1DCEB;	padding:5px;	color: #3A4F6C;}
+.even  { background-color: #DFE6EF; padding: 5px;}
+.odd   { background-color: #EEF2F7; padding: 5px;}
+.foot  { background-color: #D1DCEB; padding-top: 5px;  padding-right: 5px;  padding-left: 5px;  padding-bottom: 5px;   color: #3A4F6C ; text-align: center; }
+tr.even td {background-color: #DFE6EF; padding: 5px;}
+tr.odd td {background-color: #EEF2F7; padding: 5px;}
+
+/****************************************************************************/
+/* NOT SURE Special system messages MAYBE */
+/* I leave the defaults */
+div.errorMsg { background-color: #5780C0; text-align: center; border-top: 1px solid #465584; border-left: 1px solid #465584; border-right: 1px solid #465584; border-bottom: 1px solid #465584; font-weight: bold; padding: 10px;  color: White; }
+div.confirmMsg { background-color: #F1F2F5; color: #465584; text-align: center; border-top: 1px solid #5780C0; border-left: 1px solid #5780C0; border-right: 1px solid #5780C0; border-bottom: 1px solid #5780C0; font-weight: bold; padding: 10px;}
+div.resultMsg { background-color : #5780C0; color: #D1DBEC; text-align: center; border-top: 1px solid #465584; border-left: 1px solid #465584; font-weight: bold; border-right: 1px solid #465584; border-bottom: 1px solid #465584; padding: 10px;}
+
+/* Settings for when you insert code in a forum post */
+div.xoopsCode {
+	background: #FFFFFF;
+	border: 1px solid #5780C0;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	padding: 6px 6px 6px 6px;
+	color: #465584;
+	margin: 20px;
+}
+/* Settings for when you quote during a forum post */
+div.xoopsQuote {
+	background: #FFFFFF;
+	border: 1px solid #5780C0;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	padding: 6px 6px 6px 6px;
+	color: #465584;
+}
+
+/****************************************************************************/
+/* Styles for the commenting system */
+.comTitle {font-weight: bold; margin-bottom: 3px; color: #465584; }
+.comText {padding: 3px;}
+.comUserStat {font-size: 12px; color: #465584; font-weight:bold; border: 1px solid #5780C0;  background-color: #FFFFFF; margin: 3px; padding: 3px;}
+.comUserStatCaption {font-weight: normal;}
+.comUserStatus {margin-left: 3px; margin-top: 10px; color: #465584; font-weight:bold; font-size: 12px;}
+.comUserRank {margin: 2px;}
+.comUserRankText {font-size: 12px;font-weight:bold;}
+.comUserRankImg {border: 0;}
+.comUserName {}
+.comUserImg {margin: 2px;}
+.comDate {font-weight: normal; font-style: italic; font-size: 12px;}
+.comDateCaption {font-weight: bold; font-style: normal;}
+
+/****************************************************************************/
+/* NOT INCLUDED IN DEFAULT */
+/* general class */
+
+/*-- head table --*/
+.head_table{
+	background-color: #5780C0;
+	width: 100%;
+	text-align: center;
+	border: 1px solid #4C77B6;
+	background-image: url(images/header_tile.gif);
+	background-repeat: repeat-x;
+}
+.body_table{
+	background-color: #FFFFFF;
+	width: 100%;
+}
+.head_logo{
+	text-align: left;
+}
+.head_menu {
+	background-color: #EEF2F7; height: 30px; vertical-align: middle;
+}
+.body_bar{
+	padding: 5px 10px; vertical-align: middle;
+}
+.head_banner {
+	text-align: center;
+}
+
+.hdrLinks {font:10px/16px arial,helvetica,sans-serif;}
+
+.bg1 { background-color:#FFFFFF } /* module main */
+.bg2 { background-color:#AAAAAA } /* border colour tables (poll, forum, etc) */
+.bg3 { background-color:#EEEEEE } /* module title/sub-title/misc */
+.bg4 { background-color:#FFFFFF } /* should be the same as bg1 */
+.fg1 { color:#000000 } /* text colour */
+.fg2 { color:#000000 } /* text colour */
+.head3 { font:bold 14px/18px trebuchet ms,arial,helvetica,sans-serif; color:#C00; }
+
+.statstable { margin:0px; padding:0px; width:auto; font-size: small; font-weight: normal;}
+.stats { vertical-align: bottom; width:625px; margin:0; border: 0;}
+.statsimg { vertical-align: bottom; width:25px; text-align:center;}
+.statsimgweekday { vertical-align: bottom; font-size: small; font-weight: normal;}
+.statswords { border-width: 0; font-size: x-small; background-color: transparent; font-weight: normal; text-align:center; width:25px;}
+.statsfore { width: 30%; padding:2px;}
+.statsdiv { text-align:center; padding:0px;}
+
+.wiwi_titre {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight : bolder;
+	font-size: 14pt;
+}
+.wiwi_soustitre {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight : bolder;
+	font-size: 10pt;
+}
+.wiwi_note {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #d78100;
+}
+
+/*---------------------- CSS FOR XOOPS 2.0.3 or later ----------------------*/
